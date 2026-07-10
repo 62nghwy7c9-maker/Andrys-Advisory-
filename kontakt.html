@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kontakt – Andrys Advisory</title>
-  <meta name="description" content="Vereinbaren Sie ein unverbindliches Erstgespräch mit Andrys Advisory: Wir klären, wo Sie stehen, was Sie erreichen wollen – und ob wir die Richtigen dafür sind.">
+  <meta name="description" content="Ihre Transformation beginnt hier: Termin bei Marco Andrys buchen, direkt anrufen oder Angebot anfordern – Andrys Advisory meldet sich umgehend zurück.">
   <meta property="og:title" content="Kontakt – Andrys Advisory">
-  <meta property="og:description" content="Sprechen wir über Ihre Transformation – unverbindliches Erstgespräch vereinbaren.">
+  <meta property="og:description" content="Ihre Transformation beginnt hier – Termin buchen, anrufen oder Angebot anfordern.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -24,7 +24,8 @@
       <nav aria-label="Hauptnavigation">
         <ul class="nav-links" id="nav-links">
           <li><a class="nav-link" href="leistungen.html" data-scramble-hover>Leistungen</a></li>
-          <li><a class="nav-link" href="referenzen.html" data-scramble-hover>Referenzen</a></li>
+          <li><a class="nav-link" href="referenzen.html" data-scramble-hover>Success Stories</a></li>
+          <li><a class="nav-link" href="karriere.html" data-scramble-hover>Karriere</a></li>
           <li><a class="nav-link" href="ueber.html" data-scramble-hover>Über uns</a></li>
           <li class="nav-cta"><a class="btn" href="kontakt.html" aria-current="page">[ Kontakt ]</a></li>
         </ul>
@@ -41,63 +42,112 @@
       <span class="tick tick-tl" aria-hidden="true">+</span>
       <span class="tick tick-tr" aria-hidden="true">+</span>
       <div class="wrap">
-        <p class="section-index" data-scramble>Kontakt / Erstgespräch</p>
-        <h1 class="page-hero-title" data-reveal>Sprechen wir über Ihre Transformation.</h1>
-        <p class="page-hero-intro" data-reveal>Im unverbindlichen Erstgespräch klären wir, wo Sie stehen, was Sie erreichen wollen – und ob wir die Richtigen dafür sind. Ehrliche Antwort garantiert, auch wenn sie „nein“ lautet.</p>
+        <p class="section-index" data-scramble>Kontakt</p>
+        <h1 class="page-hero-title" data-reveal>Ihre Transformation beginnt hier.</h1>
+        <p class="page-hero-intro" data-reveal>Ob erste Orientierung, konkrete Herausforderung oder strategische Weichenstellung – wir hören zu und denken mit.</p>
       </div>
     </header>
 
-    <section class="section-pad" aria-label="Kontaktaufnahme">
+    <!-- ======================= DREI WEGE ======================= -->
+    <section class="section-pad" aria-label="Kontaktwege" style="padding-bottom: 0;">
+      <div class="wrap">
+        <div class="channels">
+          <a class="channel" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3_uqz3TkeUjfCa07YS_GQ2nQ-Uyit7l61m3bAlLoxjbRpQH9XgvPuZj8Px4n9h-I52rLPjmBTU?gv=true" rel="noopener" data-reveal>
+            <span class="channel-no" aria-hidden="true">/01</span>
+            <h2 class="channel-name">Termin buchen</h2>
+            <p class="channel-desc">Sparen Sie Zeit und buchen Sie direkt einen Termin bei unserem CEO und Program Manager Marco Andrys.</p>
+            <span class="channel-cta">Google Kalender öffnen <span aria-hidden="true">↗</span></span>
+          </a>
+          <a class="channel" href="tel:+4915565532059" data-reveal style="--rd:100ms">
+            <span class="channel-no" aria-hidden="true">/02</span>
+            <h2 class="channel-name">Direkt anrufen</h2>
+            <p class="channel-desc">Sie haben eine dringende Frage? Rufen Sie einfach an. Wir helfen Ihnen gerne weiter.</p>
+            <span class="channel-cta">+49 155 655 320 59</span>
+          </a>
+          <a class="channel" href="#formular" data-reveal style="--rd:200ms">
+            <span class="channel-no" aria-hidden="true">/03</span>
+            <h2 class="channel-name">Angebot anfordern</h2>
+            <p class="channel-desc">Schildern Sie uns Ihr Anliegen – wir melden uns per Mail bei Ihnen zurück, innerhalb kürzester Zeit.</p>
+            <span class="channel-cta">Zum Formular <span aria-hidden="true">↓</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= FORMULAR ======================= -->
+    <section class="section-pad" id="formular" aria-label="Angebot anfordern">
       <div class="wrap">
         <div class="kontakt-grid">
 
-          <form id="kontakt-form" data-reveal>
-            <div class="field">
-              <label for="f-name">Ihr Name</label>
-              <input id="f-name" name="name" type="text" autocomplete="name" required>
-            </div>
-            <div class="field">
-              <label for="f-firma">Unternehmen (optional)</label>
-              <input id="f-firma" name="firma" type="text" autocomplete="organization">
-            </div>
-            <div class="field">
-              <label for="f-thema">Worum geht es?</label>
-              <select id="f-thema" name="thema">
-                <option>IT-Strategie &amp; Governance</option>
-                <option>Projektmanagement &amp; Change</option>
-                <option>Prozessoptimierung</option>
-                <option>Projekt-Audit &amp; Qualitätssicherung</option>
-                <option>Infrastruktur &amp; Netzwerkarchitektur</option>
-                <option>Monitoring &amp; Systemtransparenz</option>
-                <option>Anderes Thema</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="f-nachricht">Ihre Situation in zwei, drei Sätzen</label>
-              <textarea id="f-nachricht" name="nachricht" required></textarea>
-            </div>
-            <button class="btn btn-solid" type="submit">[ Nachricht verfassen <span class="arrow" aria-hidden="true">→</span> ]</button>
-            <p class="form-note">Öffnet Ihr E-Mail-Programm mit vorbereiteter Nachricht.<br>Es werden keine Daten an einen Server übertragen.</p>
-          </form>
+          <div>
+            <p class="section-index" data-scramble>Angebot anfordern</p>
+            <h2 class="section-title" data-reveal style="font-size: clamp(1.6rem, 3vw, 2.4rem);">Schildern Sie uns Ihr Anliegen.</h2>
+            <p class="section-intro" data-reveal>Hinterlassen Sie Ihre Kontaktdaten – wir melden uns umgehend bei Ihnen.</p>
+
+            <form id="kontakt-form" data-reveal style="margin-top: 2.5rem;">
+              <div class="field-row">
+                <div class="field">
+                  <label for="f-vorname">Vorname</label>
+                  <input id="f-vorname" name="vorname" type="text" autocomplete="given-name" required>
+                </div>
+                <div class="field">
+                  <label for="f-nachname">Nachname</label>
+                  <input id="f-nachname" name="nachname" type="text" autocomplete="family-name" required>
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="f-email">E-Mail</label>
+                  <input id="f-email" name="email" type="email" autocomplete="email" required>
+                </div>
+                <div class="field">
+                  <label for="f-telefon">Telefon (optional)</label>
+                  <input id="f-telefon" name="telefon" type="tel" autocomplete="tel">
+                </div>
+              </div>
+              <div class="field">
+                <label for="f-quelle">Wie haben Sie von uns erfahren?</label>
+                <select id="f-quelle" name="quelle">
+                  <option>TV Werbespot</option>
+                  <option>Empfehlung von Freunden, Familie oder Kollegen</option>
+                  <option>LinkedIn Beitrag</option>
+                  <option>Sonstiges</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-nachricht">Nachricht</label>
+                <textarea id="f-nachricht" name="nachricht" required></textarea>
+              </div>
+              <div class="field field-check">
+                <input id="f-datenschutz" name="datenschutz" type="checkbox" required>
+                <label for="f-datenschutz">Ich akzeptiere die <a href="datenschutz.html">Datenschutzerklärung</a>.</label>
+              </div>
+              <button class="btn btn-solid" type="submit">[ Nachricht senden <span class="arrow" aria-hidden="true">→</span> ]</button>
+              <p class="form-note">Öffnet Ihr E-Mail-Programm mit vorbereiteter Nachricht.<br>Es werden keine Daten an einen Server übertragen.</p>
+            </form>
+          </div>
 
           <aside class="kontakt-aside" data-reveal style="--rd:150ms">
             <dl class="about-facts">
               <div class="fact">
                 <dt>E-Mail</dt>
-                <!-- TODO: E-Mail-Adresse prüfen/ersetzen (Platzhalter auf Basis der Domain) -->
                 <dd><a href="mailto:info@andrys-advisory.de">info@andrys-advisory.de</a></dd>
               </div>
               <div class="fact">
-                <dt>Standort</dt>
-                <dd>Kerpen, Region Köln/Bonn<br>50.87° N / 6.69° O</dd>
+                <dt>Telefon</dt>
+                <dd><a href="tel:+4915565532059">+49 155 655 320 59</a></dd>
+              </div>
+              <div class="fact">
+                <dt>Anschrift</dt>
+                <dd>Andrys Advisory GmbH<br>Am Keuschenend 59<br>50170 Kerpen</dd>
               </div>
               <div class="fact">
                 <dt>Ansprechpartner</dt>
-                <dd>Marco Andrys, Gründer</dd>
+                <dd>Marco Andrys, CEO &amp; Program Manager</dd>
               </div>
               <div class="fact">
-                <dt>Reaktionszeit</dt>
-                <dd>Antwort in der Regel innerhalb von zwei Werktagen</dd>
+                <dt>Bewertungen</dt>
+                <dd><a href="https://www.provenexpert.com/andrys-advisory-gmbh/" rel="noopener">ProvenExpert-Profil ↗</a></dd>
               </div>
             </dl>
           </aside>
@@ -139,8 +189,10 @@
       <p>© 2026 Andrys Advisory GmbH · 50.87° N / 6.69° O</p>
       <ul class="footer-links">
         <li><a href="leistungen.html">Leistungen</a></li>
-        <li><a href="referenzen.html">Referenzen</a></li>
+        <li><a href="referenzen.html">Success Stories</a></li>
+        <li><a href="karriere.html">Karriere</a></li>
         <li><a href="kontakt.html">Kontakt</a></li>
+        <li><a href="https://www.provenexpert.com/andrys-advisory-gmbh/" rel="noopener">Bewertungen</a></li>
         <li><a href="impressum.html">Impressum</a></li>
         <li><a href="datenschutz.html">Datenschutz</a></li>
       </ul>

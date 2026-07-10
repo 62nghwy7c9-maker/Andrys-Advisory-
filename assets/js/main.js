@@ -190,14 +190,21 @@
   if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var name = form.elements.name.value.trim();
-      var firma = form.elements.firma.value.trim();
-      var thema = form.elements.thema.value;
-      var nachricht = form.elements.nachricht.value.trim();
-      var body = "Guten Tag Herr Andrys,%0D%0A%0D%0A" +
-        encodeURIComponent(nachricht) + "%0D%0A%0D%0A—%0D%0A" +
-        encodeURIComponent(name) + (firma ? "%0D%0A" + encodeURIComponent(firma) : "");
-      var subject = encodeURIComponent("Erstgespräch: " + thema);
+      var f = form.elements;
+      var name = (f.vorname.value + " " + f.nachname.value).trim();
+      var teile = [
+        "Guten Tag Herr Andrys,",
+        "",
+        f.nachricht.value.trim(),
+        "",
+        "—",
+        name,
+        "E-Mail: " + f.email.value.trim()
+      ];
+      if (f.telefon.value.trim()) teile.push("Telefon: " + f.telefon.value.trim());
+      teile.push("Aufmerksam geworden über: " + f.quelle.value);
+      var subject = encodeURIComponent("Angebot anfordern – " + name);
+      var body = encodeURIComponent(teile.join("\r\n"));
       window.location.href = "mailto:info@andrys-advisory.de?subject=" + subject + "&body=" + body;
     });
   }
