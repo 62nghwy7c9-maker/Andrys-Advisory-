@@ -71,6 +71,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 ::selection { background: var(--slate); color: var(--frost); }
 
+[id] { scroll-margin-top: calc(var(--nav-h) + 1.5rem); }
+
 :focus-visible {
   outline: 1px solid var(--slate);
   outline-offset: 3px;
