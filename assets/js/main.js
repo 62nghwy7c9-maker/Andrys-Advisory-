@@ -1,4 +1,6 @@
-/* Andrys Advisory — Interaktion im „Arctic“-System (siehe DESIGN-SYSTEM.md) */
+/* Andrys Advisory — Interaktion im „Arctic“-System (siehe DESIGN-SYSTEM.md).
+   Kein Framework. Cinematik ohne Scroll-Hijacking: alles hängt am echten
+   Scroll-Fortschritt, prefers-reduced-motion schaltet Bewegung ab. */
 (function () {
   "use strict";
 
@@ -121,112 +123,82 @@
     el.addEventListener("mouseenter", function () { scramble(el); });
   });
 
-  /* ---- Signature: Drahtgitter-Kristall mit Tiefennebel ---- */
-  var canvas = document.getElementById("crystal");
-  if (canvas && canvas.getContext && !reducedMotion) {
-    var ctx = canvas.getContext("2d");
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var W = 0, H = 0;
-
-    var resize = function () {
-      W = canvas.clientWidth;
-      H = canvas.clientHeight;
-      canvas.width = W * dpr;
-      canvas.height = H * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  /* ---- Cinematik: Hero-Fortschritt als CSS-Variable (--hp) ----
+     Der Hero ist höher als der Viewport, sein Inhalt klebt (sticky).
+     Der Fortschritt 0…1 steuert Headline-Abgang und HUD-Ausblendung;
+     die WebGL-Szene liest denselben Scrollweg (scene.js). */
+  var hero = document.querySelector(".hero[data-cinematic]");
+  if (hero && !reducedMotion) {
+    var heroTicking = false;
+    var updateHero = function () {
+      heroTicking = false;
+      var track = hero.offsetHeight - window.innerHeight;
+      var p = track > 0 ? Math.min(Math.max(-hero.getBoundingClientRect().top / track, 0), 1) : 0;
+      hero.style.setProperty("--hp", p.toFixed(4));
     };
-    resize();
-    window.addEventListener("resize", resize);
+    window.addEventListener("scroll", function () {
+      if (!heroTicking) { heroTicking = true; requestAnimationFrame(updateHero); }
+    }, { passive: true });
+    updateHero();
+  }
 
-    /* Ikosaeder: 12 Ecken, 30 Kanten */
-    var t = (1 + Math.sqrt(5)) / 2;
-    var V = [
-      [-1, t, 0], [1, t, 0], [-1, -t, 0], [1, -t, 0],
-      [0, -1, t], [0, 1, t], [0, -1, -t], [0, 1, -t],
-      [t, 0, -1], [t, 0, 1], [-t, 0, -1], [-t, 0, 1]
-    ].map(function (v) {
-      var l = Math.hypot(v[0], v[1], v[2]);
-      return [v[0] / l, v[1] / l, v[2] / l];
+  /* ---- Cinematik: Manifest — Wörter tauchen aus dem Nebel auf ---- */
+  var manifests = document.querySelectorAll("[data-words]");
+  manifests.forEach(function (el) {
+    var text = el.textContent.trim();
+    el.setAttribute("aria-label", text);
+    el.textContent = "";
+    var frag = document.createDocumentFragment();
+    text.split(/\s+/).forEach(function (word, i) {
+      var span = document.createElement("span");
+      span.className = "w";
+      span.setAttribute("aria-hidden", "true");
+      span.textContent = word;
+      frag.appendChild(span);
+      frag.appendChild(document.createTextNode(" "));
     });
-    var E = [
-      [0,1],[0,5],[0,7],[0,10],[0,11],[1,5],[1,7],[1,8],[1,9],[2,3],
-      [2,4],[2,6],[2,10],[2,11],[3,4],[3,6],[3,8],[3,9],[4,5],[4,9],
-      [4,11],[5,9],[5,11],[6,7],[6,8],[6,10],[7,8],[7,10],[8,9],[10,11]
-    ];
-
-    /* Partikel-Drift („Schneestaub“) */
-    var P = [];
-    for (var i = 0; i < 60; i++) {
-      P.push({
-        x: Math.random(), y: Math.random(),
-        r: 0.5 + Math.random() * 1.2,
-        s: 0.006 + Math.random() * 0.02,
-        o: 0.15 + Math.random() * 0.35
+    el.appendChild(frag);
+  });
+  if (manifests.length && !reducedMotion) {
+    var wordsTicking = false;
+    var updateWords = function () {
+      wordsTicking = false;
+      manifests.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        var vh = window.innerHeight;
+        /* Fortschritt: Element wandert von 85 % zu 35 % der Viewporthöhe */
+        var p = Math.min(Math.max((vh * 0.85 - r.top) / (vh * 0.5), 0), 1);
+        var words = el.children;
+        var lit = p * words.length;
+        for (var i = 0; i < words.length; i++) {
+          words[i].style.opacity = i < lit ? 1 : 0.18;
+        }
       });
-    }
-
-    var running = true;
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(function (entries) {
-        running = entries[0].isIntersecting;
-      }).observe(canvas);
-    }
-
-    var a = 0;
-    var frame = function () {
-      requestAnimationFrame(frame);
-      if (!running) return;
-      a += 0.0022;
-      ctx.clearRect(0, 0, W, H);
-
-      /* Staub */
-      for (var i = 0; i < P.length; i++) {
-        var p = P[i];
-        p.y -= p.s / 100;
-        if (p.y < -0.02) { p.y = 1.02; p.x = Math.random(); }
-        ctx.globalAlpha = p.o;
-        ctx.fillStyle = "#b6bac5";
-        ctx.beginPath();
-        ctx.arc(p.x * W, p.y * H, p.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      ctx.globalAlpha = 1;
-
-      /* Kristall projizieren */
-      var cx = W / 2, cy = H * 0.46;
-      var scale = Math.min(W, H) * 0.34;
-      var sinA = Math.sin(a), cosA = Math.cos(a);
-      var tilt = 0.42, sinT = Math.sin(tilt), cosT = Math.cos(tilt);
-
-      var proj = V.map(function (v) {
-        var x = v[0] * cosA - v[2] * sinA;
-        var z = v[0] * sinA + v[2] * cosA;
-        var y = v[1] * cosT - z * sinT;
-        z = v[1] * sinT + z * cosT;
-        var d = 3.2 / (3.2 + z);
-        return { x: cx + x * scale * d, y: cy + y * scale * d, z: z };
-      });
-
-      for (var j = 0; j < E.length; j++) {
-        var p1 = proj[E[j][0]], p2 = proj[E[j][1]];
-        var depth = (p1.z + p2.z) / 2;                  /* -1 … 1 */
-        var alpha = 0.08 + (1 - (depth + 1) / 2) * 0.3; /* Tiefennebel */
-        ctx.strokeStyle = "rgba(56, 62, 78, " + alpha.toFixed(3) + ")";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(p1.x, p1.y);
-        ctx.lineTo(p2.x, p2.y);
-        ctx.stroke();
-      }
-
-      /* Ecken als Messpunkte */
-      for (var k = 0; k < proj.length; k++) {
-        var q = proj[k];
-        var va = 0.15 + (1 - (q.z + 1) / 2) * 0.5;
-        ctx.fillStyle = "rgba(56, 62, 78, " + va.toFixed(3) + ")";
-        ctx.fillRect(q.x - 1.5, q.y - 1.5, 3, 3);
-      }
     };
-    frame();
+    window.addEventListener("scroll", function () {
+      if (!wordsTicking) { wordsTicking = true; requestAnimationFrame(updateWords); }
+    }, { passive: true });
+    updateWords();
+  } else {
+    manifests.forEach(function (el) {
+      Array.prototype.forEach.call(el.children, function (w) { w.style.opacity = 1; });
+    });
+  }
+
+  /* ---- Kontakt: Formular öffnet vorbefülltes E-Mail-Programm ---- */
+  var form = document.getElementById("kontakt-form");
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = form.elements.name.value.trim();
+      var firma = form.elements.firma.value.trim();
+      var thema = form.elements.thema.value;
+      var nachricht = form.elements.nachricht.value.trim();
+      var body = "Guten Tag Herr Andrys,%0D%0A%0D%0A" +
+        encodeURIComponent(nachricht) + "%0D%0A%0D%0A—%0D%0A" +
+        encodeURIComponent(name) + (firma ? "%0D%0A" + encodeURIComponent(firma) : "");
+      var subject = encodeURIComponent("Erstgespräch: " + thema);
+      window.location.href = "mailto:info@andrys-advisory.de?subject=" + subject + "&body=" + body;
+    });
   }
 })();

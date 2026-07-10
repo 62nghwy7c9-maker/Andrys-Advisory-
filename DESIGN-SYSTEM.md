@@ -51,8 +51,11 @@ Das Interface verhält sich wie ein Messinstrument, nicht wie eine Broschüre:
   Viewport aus Zufallszeichen ein (Scramble-Effekt).
 - Scroll-Reveals: kleine Translation + Fade, langsam und gleichmäßig.
 - Kennzahlen zählen hoch, sobald sichtbar.
-- Ambient: langsam rotierender Drahtgitter-Kristall (Canvas) mit Tiefennebel
-  und Partikel-Drift im Hero — das Signature-Element.
+- Ambient: WebGL-Eiskristall (Three.js, self-hosted) mit Fresnel-Shader,
+  Struktur-Drahtgitter und Schneestaub im Hero — das Signature-Element.
+  Der Hero ist cinematisch: sein Inhalt klebt einen Viewport lang (sticky),
+  der Scrollweg steuert Kristall-Rotation/Zoom und den Headline-Abgang.
+  Kein Scroll-Hijacking; ohne WebGL bleibt der CSS-Nebel als Bühne.
 - Korn-Overlay (SVG-Noise, ~4 % Deckkraft) über der gesamten Seite.
 - `prefers-reduced-motion` deaktiviert Scramble, Rotation, Drift und Reveals.
 

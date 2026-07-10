@@ -20,14 +20,13 @@
 
   <header class="nav" id="nav">
     <div class="wrap nav-inner">
-      <a class="brand" href="#top" aria-label="Andrys Advisory – zur Startseite">Andrys&nbsp;Advisory<span class="brand-dot">®</span></a>
+      <a class="brand" href="index.html" aria-label="Andrys Advisory – zur Startseite">Andrys&nbsp;Advisory<span class="brand-dot">®</span></a>
       <nav aria-label="Hauptnavigation">
         <ul class="nav-links" id="nav-links">
-          <li><a class="nav-link" href="#leistungen" data-scramble-hover>Leistungen</a></li>
-          <li><a class="nav-link" href="#ansatz" data-scramble-hover>Ansatz</a></li>
-          <li><a class="nav-link" href="#referenzen" data-scramble-hover>Referenzen</a></li>
-          <li><a class="nav-link" href="#ueber" data-scramble-hover>Über uns</a></li>
-          <li class="nav-cta"><a class="btn" href="#kontakt">[ Erstgespräch ]</a></li>
+          <li><a class="nav-link" href="leistungen.html" data-scramble-hover>Leistungen</a></li>
+          <li><a class="nav-link" href="referenzen.html" data-scramble-hover>Referenzen</a></li>
+          <li><a class="nav-link" href="ueber.html" data-scramble-hover>Über uns</a></li>
+          <li class="nav-cta"><a class="btn" href="kontakt.html">[ Kontakt ]</a></li>
         </ul>
       </nav>
       <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menü öffnen">
@@ -39,27 +38,33 @@
   <main id="main">
 
     <!-- ============================== HERO ============================== -->
-    <section class="hero" id="top" aria-label="Einführung">
-      <canvas class="hero-canvas" id="crystal" aria-hidden="true"></canvas>
+    <section class="hero" id="top" data-cinematic aria-label="Einführung">
+      <div class="hero-sticky">
+        <canvas class="hero-canvas" id="crystal" aria-hidden="true"></canvas>
 
-      <p class="hud hud-tl" aria-hidden="true">Beratung /<br>Digitale Transformation</p>
-      <p class="hud hud-tr" aria-hidden="true">50.87° N / 6.69° O<br>Kerpen · DE</p>
+        <p class="hud hud-tl" aria-hidden="true">Beratung /<br>Digitale Transformation</p>
+        <p class="hud hud-tr" aria-hidden="true">50.87° N / 6.69° O<br>Kerpen · DE</p>
 
-      <div class="wrap">
-        <div class="hero-stagger">
-          <p class="hero-eyebrow" data-scramble>Andrys Advisory — Est. Kerpen</p>
-          <h1 class="hero-title">Transformation, die nicht im <span class="em">Konzept</span> endet.</h1>
-          <p class="hero-sub">Wir führen Organisationen durch komplexe Veränderungen – von der IT&#8209;Strategie bis zum messbaren Ergebnis. Mit Senior&#8209;Experten, die nicht nur empfehlen, sondern umsetzen.</p>
-          <div class="hero-cta">
-            <a class="btn btn-solid" href="#kontakt">Erstgespräch vereinbaren <span class="arrow" aria-hidden="true">→</span></a>
-            <a class="btn btn-ghost" href="#leistungen">Leistungen ansehen</a>
+        <div class="wrap">
+          <div class="hero-stagger">
+            <p class="hero-eyebrow" data-scramble>Andrys Advisory — Est. Kerpen</p>
+            <h1 class="hero-title">
+              <span class="line"><span class="line-in">Transformation,</span></span>
+              <span class="line"><span class="line-in">die nicht im</span></span>
+              <span class="line"><span class="line-in"><span class="em">Konzept</span> endet.</span></span>
+            </h1>
+            <p class="hero-sub">Wir führen Organisationen durch komplexe Veränderungen – von der IT&#8209;Strategie bis zum messbaren Ergebnis. Mit Senior&#8209;Experten, die nicht nur empfehlen, sondern umsetzen.</p>
+            <div class="hero-cta">
+              <a class="btn btn-solid" href="kontakt.html">Erstgespräch vereinbaren <span class="arrow" aria-hidden="true">→</span></a>
+              <a class="btn btn-ghost" href="leistungen.html">Leistungen ansehen</a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <p class="hud hud-bl" aria-hidden="true">Senior-Level / Hands-on<br>Messbar im Ergebnis</p>
-      <p class="hero-scrollcue" aria-hidden="true">Scroll</p>
-      <p class="hud hud-br" aria-hidden="true">Index 00 / 05<br>© 2026</p>
+        <p class="hud hud-bl" aria-hidden="true">Senior-Level / Hands-on<br>Messbar im Ergebnis</p>
+        <p class="hero-scrollcue" aria-hidden="true">Scroll</p>
+        <p class="hud hud-br" aria-hidden="true">Index 00 / 04<br>© 2026</p>
+      </div>
     </section>
 
     <!-- ============================ KENNZAHLEN ============================ -->
@@ -84,71 +89,91 @@
       </div>
     </section>
 
-    <!-- ============================ LEISTUNGEN ============================ -->
-    <section class="section-pad" id="leistungen" aria-labelledby="leistungen-title">
+    <!-- ============================== MANIFEST ============================== -->
+    <section class="manifest section-pad" aria-label="Haltung">
       <span class="tick tick-tl" aria-hidden="true">+</span>
       <span class="tick tick-tr" aria-hidden="true">+</span>
       <div class="wrap">
+        <p class="manifest-text" data-words>Digitale Transformation scheitert selten an der Technik. Sie scheitert an Struktur, Verantwortung und Kommunikation. Genau dort setzen wir an – und bleiben, bis es läuft.</p>
+        <p class="manifest-foot"><a class="link-more" href="ueber.html">Wofür wir stehen <span aria-hidden="true">→</span></a></p>
+      </div>
+    </section>
+
+    <!-- ============================ LEISTUNGEN ============================ -->
+    <section class="section-pad" id="leistungen" aria-labelledby="leistungen-title" style="border-top: 1px solid var(--line);">
+      <div class="wrap">
         <p class="section-index" data-scramble>01 / Leistungen</p>
         <h2 class="section-title" id="leistungen-title" data-reveal>Vom Konzept bis zur Umsetzung – aus einer Hand.</h2>
-        <p class="section-intro" data-reveal>Digitale Transformation scheitert selten an der Technik, sondern an Struktur, Verantwortung und Kommunikation. Genau dort setzen wir an.</p>
 
         <ul class="services-list" style="margin-top: clamp(3rem, 6vw, 4.5rem);">
-          <li class="service" data-reveal>
-            <span class="service-no" aria-hidden="true">/01</span>
-            <span class="service-tag">Strategie</span>
-            <div>
-              <h3 class="service-name">IT‑Strategie &amp; Governance</h3>
-              <p class="service-desc">Eine IT, die zum Geschäft passt: klare Zielbilder, Standards, Verantwortlichkeiten und Entscheidungswege – als belastbare Grundlage jeder Transformation.</p>
-            </div>
-            <span class="service-mark" aria-hidden="true">↗</span>
+          <li data-reveal>
+            <a class="service" href="leistungen.html#strategie">
+              <span class="service-no" aria-hidden="true">/01</span>
+              <span class="service-tag">Strategie</span>
+              <div>
+                <h3 class="service-name">IT‑Strategie &amp; Governance</h3>
+                <p class="service-desc">Klare Zielbilder, Standards, Verantwortlichkeiten und Entscheidungswege – als belastbare Grundlage jeder Transformation.</p>
+              </div>
+              <span class="service-mark" aria-hidden="true">↗</span>
+            </a>
           </li>
-          <li class="service" data-reveal>
-            <span class="service-no" aria-hidden="true">/02</span>
-            <span class="service-tag">Steuerung</span>
-            <div>
-              <h3 class="service-name">Projektmanagement &amp; Change</h3>
-              <p class="service-desc">Wir führen Programme auch durch raue Phasen – strukturiert, transparent und mit echter Akzeptanz bei den Menschen, die die Veränderung tragen.</p>
-            </div>
-            <span class="service-mark" aria-hidden="true">↗</span>
+          <li data-reveal>
+            <a class="service" href="leistungen.html#projekte">
+              <span class="service-no" aria-hidden="true">/02</span>
+              <span class="service-tag">Steuerung</span>
+              <div>
+                <h3 class="service-name">Projektmanagement &amp; Change</h3>
+                <p class="service-desc">Programme strukturiert durch raue Phasen führen – transparent und mit echter Akzeptanz bei den Menschen.</p>
+              </div>
+              <span class="service-mark" aria-hidden="true">↗</span>
+            </a>
           </li>
-          <li class="service" data-reveal>
-            <span class="service-no" aria-hidden="true">/03</span>
-            <span class="service-tag">Prozesse</span>
-            <div>
-              <h3 class="service-name">Prozessoptimierung</h3>
-              <p class="service-desc">Abläufe messbar verbessern statt nur dokumentieren: Wir heben Potenziale in Ihren Kernprozessen und verankern sie dauerhaft in der Organisation.</p>
-            </div>
-            <span class="service-mark" aria-hidden="true">↗</span>
+          <li data-reveal>
+            <a class="service" href="leistungen.html#prozesse">
+              <span class="service-no" aria-hidden="true">/03</span>
+              <span class="service-tag">Prozesse</span>
+              <div>
+                <h3 class="service-name">Prozessoptimierung</h3>
+                <p class="service-desc">Abläufe messbar verbessern statt nur dokumentieren – und die Verbesserungen dauerhaft verankern.</p>
+              </div>
+              <span class="service-mark" aria-hidden="true">↗</span>
+            </a>
           </li>
-          <li class="service" data-reveal>
-            <span class="service-no" aria-hidden="true">/04</span>
-            <span class="service-tag">Sicherheit</span>
-            <div>
-              <h3 class="service-name">Projekt‑Audit &amp; Qualitätssicherung</h3>
-              <p class="service-desc">Der unabhängige Blick auf Ihr Vorhaben: Risiken früh erkennen, Qualität sichern, Budget und Termine schützen – bevor es teuer wird.</p>
-            </div>
-            <span class="service-mark" aria-hidden="true">↗</span>
+          <li data-reveal>
+            <a class="service" href="leistungen.html#audit">
+              <span class="service-no" aria-hidden="true">/04</span>
+              <span class="service-tag">Sicherheit</span>
+              <div>
+                <h3 class="service-name">Projekt‑Audit &amp; Qualitätssicherung</h3>
+                <p class="service-desc">Der unabhängige Blick auf Ihr Vorhaben: Risiken früh erkennen, Budget und Termine schützen.</p>
+              </div>
+              <span class="service-mark" aria-hidden="true">↗</span>
+            </a>
           </li>
-          <li class="service" data-reveal>
-            <span class="service-no" aria-hidden="true">/05</span>
-            <span class="service-tag">Infrastruktur</span>
-            <div>
-              <h3 class="service-name">Infrastruktur &amp; Netzwerkarchitektur</h3>
-              <p class="service-desc">Standardisierte, skalierbare Infrastruktur – vom Zielbild der Netzwerkarchitektur bis zum internationalen Standort‑Rollout.</p>
-            </div>
-            <span class="service-mark" aria-hidden="true">↗</span>
+          <li data-reveal>
+            <a class="service" href="leistungen.html#infrastruktur">
+              <span class="service-no" aria-hidden="true">/05</span>
+              <span class="service-tag">Infrastruktur</span>
+              <div>
+                <h3 class="service-name">Infrastruktur &amp; Netzwerkarchitektur</h3>
+                <p class="service-desc">Standardisierte, skalierbare Infrastruktur – vom Zielbild bis zum internationalen Rollout.</p>
+              </div>
+              <span class="service-mark" aria-hidden="true">↗</span>
+            </a>
           </li>
-          <li class="service" data-reveal>
-            <span class="service-no" aria-hidden="true">/06</span>
-            <span class="service-tag">Transparenz</span>
-            <div>
-              <h3 class="service-name">Monitoring &amp; Systemtransparenz</h3>
-              <p class="service-desc">Echtzeit‑Einblick in Verfügbarkeit und Performance Ihrer Systeme – als Grundlage für souveräne Entscheidungen im Betrieb und im Projekt.</p>
-            </div>
-            <span class="service-mark" aria-hidden="true">↗</span>
+          <li data-reveal>
+            <a class="service" href="leistungen.html#monitoring">
+              <span class="service-no" aria-hidden="true">/06</span>
+              <span class="service-tag">Transparenz</span>
+              <div>
+                <h3 class="service-name">Monitoring &amp; Systemtransparenz</h3>
+                <p class="service-desc">Echtzeit‑Einblick in Verfügbarkeit und Performance – als Grundlage souveräner Entscheidungen.</p>
+              </div>
+              <span class="service-mark" aria-hidden="true">↗</span>
+            </a>
           </li>
         </ul>
+        <p class="section-foot" data-reveal><a class="link-more" href="leistungen.html">Alle Leistungen im Detail <span aria-hidden="true">→</span></a></p>
       </div>
     </section>
 
@@ -192,27 +217,28 @@
             <p class="story-figure">14<small>Länder</small></p>
             <div>
               <h3 class="story-name">IT‑Infrastruktur konzernweit standardisiert</h3>
-              <p class="story-desc">Für einen internationalen Unternehmensverbund haben wir die Standardisierung der IT‑Infrastruktur in 14 Ländern begleitet – von der Architektur bis zum Rollout.</p>
+              <p class="story-desc">Standardisierung der IT‑Infrastruktur eines internationalen Unternehmensverbunds – von der Architektur bis zum Rollout in 14 Ländern.</p>
             </div>
-            <p class="story-result">Effizienz, Synergien und einheitliche Standards im gesamten Verbund</p>
+            <p class="story-result">Einheitliche Standards im gesamten Verbund</p>
           </article>
           <article class="story" data-reveal style="--rd:120ms">
             <p class="story-figure">160+<small>Gesellschaften</small></p>
             <div>
               <h3 class="story-name">Monitoring‑Lösung mit Echtzeit‑Transparenz</h3>
-              <p class="story-desc">Mit einer skalierbaren Monitoring‑Lösung haben wir Echtzeit‑Einblick in Systemverfügbarkeit und Performance von über 160 Gesellschaften geschaffen.</p>
+              <p class="story-desc">Skalierbares Monitoring mit Echtzeit‑Einblick in Systemverfügbarkeit und Performance von über 160 Gesellschaften.</p>
             </div>
-            <p class="story-result">Souveräne Entscheidungen auf Basis belastbarer Live‑Daten</p>
+            <p class="story-result">Entscheidungen auf Basis belastbarer Live‑Daten</p>
           </article>
           <article class="story" data-reveal style="--rd:240ms">
             <p class="story-figure"><span class="em">SAP</span><small>Transformation</small></p>
             <div>
-              <h3 class="story-name">SAP‑Projekt als Teil der digitalen Transformation</h3>
-              <p class="story-desc">Im Rahmen einer mehrjährigen Zusammenarbeit haben wir zahlreiche Projekte gesteuert und umgesetzt – darunter ein SAP‑Projekt als Kernstück der digitalen Transformation unseres Kunden.</p>
+              <h3 class="story-name">SAP‑Projekt als Kern der Transformation</h3>
+              <p class="story-desc">Mehrjährige Zusammenarbeit mit zahlreichen Projekten – darunter ein SAP‑Projekt als Kernstück der digitalen Transformation.</p>
             </div>
             <p class="story-result">Erfolgreiche Umsetzung, langfristiges Vertrauen</p>
           </article>
         </div>
+        <p class="section-foot" data-reveal><a class="link-more" href="referenzen.html">Alle Fallstudien lesen <span aria-hidden="true">→</span></a></p>
       </div>
     </section>
 
@@ -236,54 +262,16 @@
       </div>
     </section>
 
-    <!-- ================================ ÜBER ================================ -->
-    <section class="section-pad" id="ueber" aria-labelledby="ueber-title" style="border-top: 1px solid var(--line);">
-      <div class="wrap">
-        <p class="section-index" data-scramble>05 / Über uns</p>
-        <div class="about-grid">
-          <div data-reveal>
-            <h2 class="about-lead" id="ueber-title">Beratung heißt für uns: Verantwortung übernehmen – für Menschen, Prozesse und Ergebnisse.</h2>
-            <p class="about-copy">Andrys Advisory wurde von Marco Andrys gegründet und steht für eine neue Generation der Beratung: Senior‑Expertise statt großer Teams, Klartext statt Folienrhetorik, Umsetzung statt Empfehlung.</p>
-            <p class="about-copy">Wir arbeiten partnerschaftlich, mit klarer Struktur und echtem Verständnis für Organisationen – und kommunizieren professionell und souverän, gerade in anspruchsvollen Situationen. So entsteht Anerkennung und Akzeptanz für Ihr Programm und Ihre Transformation.</p>
-          </div>
-          <dl class="about-facts" data-reveal style="--rd:150ms">
-            <div class="fact">
-              <dt>Gründer</dt>
-              <dd>Marco Andrys</dd>
-            </div>
-            <div class="fact">
-              <dt>Standort</dt>
-              <dd>Kerpen, Region Köln/Bonn · 50.87° N, 6.69° O</dd>
-            </div>
-            <div class="fact">
-              <dt>Fokus</dt>
-              <dd>Digitale Transformation, Prozessoptimierung, IT‑Governance</dd>
-            </div>
-            <div class="fact">
-              <dt>Arbeitsweise</dt>
-              <dd>Senior‑Level, hands‑on, messbar</dd>
-            </div>
-          </dl>
-        </div>
-      </div>
-    </section>
-
-    <!-- =============================== KONTAKT =============================== -->
-    <section class="contact section-pad" id="kontakt" aria-labelledby="kontakt-title">
+    <!-- =============================== KONTAKT-BAND =============================== -->
+    <section class="contact cta-band" aria-labelledby="kontakt-title">
       <span class="tick tick-tl" aria-hidden="true">+</span>
       <span class="tick tick-tr" aria-hidden="true">+</span>
       <div class="wrap">
         <p class="section-index" data-scramble>Kontakt</p>
-        <h2 class="contact-title" id="kontakt-title" data-reveal>Sprechen wir über Ihre Transformation.</h2>
-        <p class="contact-sub" data-reveal>Im unverbindlichen Erstgespräch klären wir, wo Sie stehen, was Sie erreichen wollen – und ob wir die Richtigen dafür sind.</p>
+        <h2 class="cta-title" id="kontakt-title" data-reveal>Sprechen wir über Ihre Transformation.</h2>
         <div class="contact-cta" data-reveal>
-          <!-- TODO: E-Mail-Adresse prüfen/ersetzen (Platzhalter auf Basis der Domain) -->
-          <a class="btn btn-solid" href="mailto:info@andrys-advisory.de?subject=Erstgespräch">[ Erstgespräch vereinbaren <span class="arrow" aria-hidden="true">→</span> ]</a>
+          <a class="btn btn-solid" href="kontakt.html">[ Erstgespräch vereinbaren <span class="arrow" aria-hidden="true">→</span> ]</a>
         </div>
-        <p class="contact-meta" data-reveal>
-          Andrys Advisory GmbH · Kerpen ·
-          <a href="mailto:info@andrys-advisory.de">info@andrys-advisory.de</a>
-        </p>
       </div>
     </section>
 
@@ -293,6 +281,9 @@
     <div class="wrap footer-inner">
       <p>© 2026 Andrys Advisory GmbH · 50.87° N / 6.69° O</p>
       <ul class="footer-links">
+        <li><a href="leistungen.html">Leistungen</a></li>
+        <li><a href="referenzen.html">Referenzen</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
         <li><a href="impressum.html">Impressum</a></li>
         <li><a href="datenschutz.html">Datenschutz</a></li>
       </ul>
@@ -300,5 +291,6 @@
   </footer>
 
   <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/scene.js" type="module"></script>
 </body>
 </html>
