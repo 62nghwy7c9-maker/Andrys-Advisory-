@@ -1,0 +1,11 @@
+/*
+Theme Name:  Andrys Arctic
+Theme URI:   https://andrys-advisory.de/
+Author:      Andrys Advisory GmbH
+Description: Arktisches Design-System (siehe DESIGN-SYSTEM.md im Projekt-Repository) als WordPress-Theme: WebGL-Eiskristall, cinematisches Scrollen, Mono-HUD-Typografie. Formular versendet über wp_mail().
+Version:     1.0.0
+Requires PHP: 7.4
+License:     Proprietär – für Andrys Advisory GmbH
+Text Domain: andrys-arctic
+*/
+/* Die eigentlichen Stile liegen in assets/css/style.css und werden in functions.php eingebunden. */

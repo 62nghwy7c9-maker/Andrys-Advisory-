@@ -1,42 +1,8 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digitale Transformation Beratung – Andrys Advisory</title>
-  <meta name="description" content="Assured Digital Transformation: Andrys Advisory begleitet Organisationen durch komplexe Transformationen – mit Struktur, Verantwortung und messbaren Ergebnissen. Projektmanagement, Prozessoptimierung, IT-Strategie, Governance und Change Management.">
-  <meta property="og:title" content="Digitale Transformation Beratung – Andrys Advisory">
-  <meta property="og:description" content="Transformation, die nicht im Konzept endet. Senior-Beratung mit Struktur, Verantwortung und messbaren Ergebnissen.">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="de_DE">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="preload" href="assets/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-
-  <a class="skip-link" href="#main">Zum Inhalt springen</a>
-
-  <header class="nav" id="nav">
-    <div class="wrap nav-inner">
-      <a class="brand" href="index.html" aria-label="Andrys Advisory – zur Startseite">Andrys&nbsp;Advisory<span class="brand-dot">®</span></a>
-      <nav aria-label="Hauptnavigation">
-        <ul class="nav-links" id="nav-links">
-          <li><a class="nav-link" href="leistungen.html" data-scramble-hover>Leistungen</a></li>
-          <li><a class="nav-link" href="referenzen.html" data-scramble-hover>Success Stories</a></li>
-          <li><a class="nav-link" href="karriere.html" data-scramble-hover>Karriere</a></li>
-          <li><a class="nav-link" href="ueber.html" data-scramble-hover>Über uns</a></li>
-          <li class="nav-cta"><a class="btn" href="kontakt.html">[ Kontakt ]</a></li>
-        </ul>
-      </nav>
-      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menü öffnen">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
-
-  <main id="main">
+<?php
+/** Startseite: cinematischer Hero mit WebGL-Kristall. */
+get_header();
+?>
+<main id="main">
 
     <!-- ============================== HERO ============================== -->
     <section class="hero" id="top" data-cinematic aria-label="Einführung">
@@ -56,8 +22,8 @@
             </h1>
             <p class="hero-sub">Entscheidend ist das Ergebnis: klare Strukturen, verlässliche Prozesse, digitale Souveränität – und eine Organisation, die mit Zuversicht in die Zukunft blickt. Wir begleiten Organisationen durch komplexe Transformationen, individuell auf Sie zugeschnitten.</p>
             <div class="hero-cta">
-              <a class="btn btn-solid" href="kontakt.html">Kontakt aufnehmen <span class="arrow" aria-hidden="true">→</span></a>
-              <a class="btn btn-ghost" href="leistungen.html">Leistungen ansehen</a>
+              <a class="btn btn-solid" href="<?php echo esc_url( home_url( '/kontakt/' ) ); ?>">Kontakt aufnehmen <span class="arrow" aria-hidden="true">→</span></a>
+              <a class="btn btn-ghost" href="<?php echo esc_url( home_url( '/leistungen/' ) ); ?>">Leistungen ansehen</a>
             </div>
           </div>
         </div>
@@ -93,7 +59,7 @@
       <div class="wrap">
         <p class="section-index" data-scramble>Unser Versprechen</p>
         <p class="manifest-text" data-words>Wir liefern nicht nur Konzepte, sondern Ergebnisse. Mit Senior ExpertInnen, die anpacken, heben wir Ihre Transformation auf das nächste Level – individuell und messbar.</p>
-        <p class="manifest-foot"><a class="link-more" href="ueber.html">Wofür wir stehen <span aria-hidden="true">→</span></a></p>
+        <p class="manifest-foot"><a class="link-more" href="<?php echo esc_url( home_url( '/ueber-uns/' ) ); ?>">Wofür wir stehen <span aria-hidden="true">→</span></a></p>
       </div>
     </section>
 
@@ -106,7 +72,7 @@
 
         <ul class="services-list" style="margin-top: clamp(3rem, 6vw, 4.5rem);">
           <li data-reveal>
-            <a class="service" href="leistungen.html#projektmanagement">
+            <a class="service" href="<?php echo esc_url( home_url( '/leistungen/#projektmanagement' ) ); ?>">
               <span class="service-no" aria-hidden="true">/01</span>
               <span class="service-tag">Steuerung</span>
               <div>
@@ -117,7 +83,7 @@
             </a>
           </li>
           <li data-reveal>
-            <a class="service" href="leistungen.html#prozesse">
+            <a class="service" href="<?php echo esc_url( home_url( '/leistungen/#prozesse' ) ); ?>">
               <span class="service-no" aria-hidden="true">/02</span>
               <span class="service-tag">Prozesse</span>
               <div>
@@ -128,7 +94,7 @@
             </a>
           </li>
           <li data-reveal>
-            <a class="service" href="leistungen.html#operationalisierung">
+            <a class="service" href="<?php echo esc_url( home_url( '/leistungen/#operationalisierung' ) ); ?>">
               <span class="service-no" aria-hidden="true">/03</span>
               <span class="service-tag">Strategie</span>
               <div>
@@ -139,7 +105,7 @@
             </a>
           </li>
           <li data-reveal>
-            <a class="service" href="leistungen.html#governance">
+            <a class="service" href="<?php echo esc_url( home_url( '/leistungen/#governance' ) ); ?>">
               <span class="service-no" aria-hidden="true">/04</span>
               <span class="service-tag">Steuerungsrahmen</span>
               <div>
@@ -150,7 +116,7 @@
             </a>
           </li>
           <li data-reveal>
-            <a class="service" href="leistungen.html#change">
+            <a class="service" href="<?php echo esc_url( home_url( '/leistungen/#change' ) ); ?>">
               <span class="service-no" aria-hidden="true">/05</span>
               <span class="service-tag">Menschen</span>
               <div>
@@ -161,7 +127,7 @@
             </a>
           </li>
         </ul>
-        <p class="section-foot" data-reveal><a class="link-more" href="leistungen.html">Alle Leistungen im Detail <span aria-hidden="true">→</span></a></p>
+        <p class="section-foot" data-reveal><a class="link-more" href="<?php echo esc_url( home_url( '/leistungen/' ) ); ?>">Alle Leistungen im Detail <span aria-hidden="true">→</span></a></p>
       </div>
     </section>
 
@@ -226,7 +192,7 @@
             <p class="story-result">Zielvorgaben termingerecht erreicht</p>
           </article>
         </div>
-        <p class="section-foot" data-reveal><a class="link-more" href="referenzen.html">Alle Success Stories lesen <span aria-hidden="true">→</span></a></p>
+        <p class="section-foot" data-reveal><a class="link-more" href="<?php echo esc_url( home_url( '/success-stories-digitale-transformation/' ) ); ?>">Alle Success Stories lesen <span aria-hidden="true">→</span></a></p>
       </div>
     </section>
 
@@ -263,29 +229,10 @@
         <p class="section-index" data-scramble>Kontakt</p>
         <h2 class="cta-title" id="kontakt-title" data-reveal>Ihre Transformation beginnt hier.</h2>
         <div class="contact-cta" data-reveal>
-          <a class="btn btn-solid" href="kontakt.html">[ Kontakt aufnehmen <span class="arrow" aria-hidden="true">→</span> ]</a>
+          <a class="btn btn-solid" href="<?php echo esc_url( home_url( '/kontakt/' ) ); ?>">[ Kontakt aufnehmen <span class="arrow" aria-hidden="true">→</span> ]</a>
         </div>
       </div>
     </section>
 
   </main>
-
-  <footer class="footer">
-    <div class="wrap footer-inner">
-      <p>© 2026 Andrys Advisory GmbH · 50.87° N / 6.69° O</p>
-      <ul class="footer-links">
-        <li><a href="leistungen.html">Leistungen</a></li>
-        <li><a href="referenzen.html">Success Stories</a></li>
-        <li><a href="karriere.html">Karriere</a></li>
-        <li><a href="kontakt.html">Kontakt</a></li>
-        <li><a href="https://www.provenexpert.com/andrys-advisory-gmbh/" rel="noopener">Bewertungen</a></li>
-        <li><a href="impressum.html">Impressum</a></li>
-        <li><a href="datenschutz.html">Datenschutz</a></li>
-      </ul>
-    </div>
-  </footer>
-
-  <script src="assets/js/main.js" defer></script>
-  <script src="assets/js/scene.js" type="module"></script>
-</body>
-</html>
+<?php get_footer(); ?>

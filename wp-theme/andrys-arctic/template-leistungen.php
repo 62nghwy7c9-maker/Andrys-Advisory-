@@ -1,0 +1,366 @@
+<?php
+/**
+ * Template Name: Leistungen
+ */
+get_header();
+?>
+<main id="main">
+
+    <header class="page-hero">
+      <span class="tick tick-tl" aria-hidden="true">+</span>
+      <span class="tick tick-tr" aria-hidden="true">+</span>
+      <div class="wrap">
+        <p class="section-index" data-scramble>Leistungen / 07 Module</p>
+        <h1 class="page-hero-title" data-reveal>We get the job done.</h1>
+        <p class="page-hero-intro" data-reveal>Ihr Partner mit Expertise und Kompetenz: Sieben Service‑Module, die Transformation tragen – von der Strategie bis zur verankerten Umsetzung. Unsere Berater übernehmen direkt verantwortungsvolle Lead‑Rollen.</p>
+      </div>
+    </header>
+
+    <!-- ===================== PROJEKT-HIGHLIGHTS ===================== -->
+    <section class="section-pad" aria-labelledby="highlights-title" style="padding-bottom: 0;">
+      <div class="wrap">
+        <p class="section-index" data-scramble>Ausgewählte Projekte</p>
+        <h2 class="section-title" id="highlights-title" data-reveal>Ergebnisse aus der Praxis.</h2>
+        <ul class="services-list" style="margin-top: clamp(2.5rem, 5vw, 3.5rem);">
+          <li data-reveal>
+            <a class="service" href="<?php echo esc_url( home_url( '/success-stories-digitale-transformation/#rollout' ) ); ?>">
+              <span class="service-no" aria-hidden="true">/A</span>
+              <span class="service-tag">14 Länder</span>
+              <div>
+                <h3 class="service-name">Corporate IT‑Strategie Rollout</h3>
+                <p class="service-desc">Internationaler Standard auf 14 Länder ausgerollt – von der Projektleitung bis zur länderspezifischen Abstimmung. Ergebnis: Effizienz, Synergien und einheitliche Standards.</p>
+              </div>
+              <span class="service-mark" aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li data-reveal>
+            <a class="service" href="<?php echo esc_url( home_url( '/success-stories-digitale-transformation/#monitoring' ) ); ?>">
+              <span class="service-no" aria-hidden="true">/B</span>
+              <span class="service-tag">160+ Gesellschaften</span>
+              <div>
+                <h3 class="service-name">Zentrales IT‑Monitoring für Holding &amp; Gesellschaften</h3>
+                <p class="service-desc">Transparenz und Kontrolle für globale IT‑Infrastrukturen: Echtzeit‑Einblicke in Systemverfügbarkeit und Performance – zentral, effizient, zukunftssicher.</p>
+              </div>
+              <span class="service-mark" aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li data-reveal>
+            <a class="service" href="<?php echo esc_url( home_url( '/success-stories-digitale-transformation/#sdwan' ) ); ?>">
+              <span class="service-no" aria-hidden="true">/C</span>
+              <span class="service-tag">PoC</span>
+              <div>
+                <h3 class="service-name">Proof of Concept für SD‑WAN</h3>
+                <p class="service-desc">Zukunftsweisende Netzwerkinfrastruktur strategisch vorbereitet – technische Evaluation, Pilotierung und Managementberatung als Basis für den konzernweiten Rollout.</p>
+              </div>
+              <span class="service-mark" aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li data-reveal>
+            <a class="service" href="<?php echo esc_url( home_url( '/success-stories-digitale-transformation/#network' ) ); ?>">
+              <span class="service-no" aria-hidden="true">/D</span>
+              <span class="service-tag">Architektur</span>
+              <div>
+                <h3 class="service-name">Next Generation Network Architecture</h3>
+                <p class="service-desc">Netzwerkarchitektur neu gedacht – sicher, skalierbar, cloud‑ready. Neue Maßstäbe für Performance, Sicherheit und Verfügbarkeit im digitalen Zeitalter.</p>
+              </div>
+              <span class="service-mark" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ======================= SERVICE-MODULE ======================= -->
+    <section aria-label="Service-Module">
+      <div class="wrap">
+
+        <article class="svc" id="governance">
+          <div class="svc-meta" data-reveal>
+            <p class="svc-index" aria-hidden="true">01</p>
+            <span class="svc-tag">Strategie &amp; Steuerung</span>
+          </div>
+          <div data-reveal style="--rd:100ms">
+            <h2 class="svc-title">IT‑Strategie &amp; Governance</h2>
+            <div class="svc-block">
+              <h3>Strategieentwicklung</h3>
+              <ul>
+                <li>Analyse Ihrer aktuellen IT-Landschaft und Ableitung von Zielarchitekturen</li>
+                <li>Erarbeitung einer mehrjährigen IT-Roadmap mit konkreten Meilensteinen</li>
+                <li>Validierung gegen Markt- und Technologietrends</li>
+              </ul>
+            </div>
+            <div class="svc-block">
+              <h3>Governance-Framework</h3>
+              <ul>
+                <li>Definition von Entscheidungsprozessen (Steering Committees, Lenkungsausschüsse)</li>
+                <li>Etablierung von Rollen und Verantwortlichkeiten (RACI-Matrix)</li>
+                <li>Implementierung von Steuerungs- und Eskalationsmechanismen</li>
+              </ul>
+            </div>
+            <p class="svc-result">Klare Leitplanken für Entscheidungen, Reduktion von Reibungsverlusten, nachhaltige Steuerung Ihrer IT</p>
+          </div>
+        </article>
+
+        <article class="svc" id="projektmanagement">
+          <div class="svc-meta" data-reveal>
+            <p class="svc-index" aria-hidden="true">02</p>
+            <span class="svc-tag">Steuerung</span>
+          </div>
+          <div data-reveal style="--rd:100ms">
+            <h2 class="svc-title">Internationales Program‑ &amp; Projektmanagement</h2>
+            <div class="svc-block">
+              <h3>Programm-Setup &amp; Strukturierung</h3>
+              <ul>
+                <li>Aufbau internationaler Programm-Offices (PMO)</li>
+                <li>Harmonisierung von Methoden über Regionen hinweg</li>
+              </ul>
+            </div>
+            <div class="svc-block">
+              <h3>Projekt-Governance &amp; Reporting</h3>
+              <ul>
+                <li>Einheitliches Reporting-Framework für alle Standorte</li>
+                <li>Dashboarding für Status, Risiken und Kosten</li>
+              </ul>
+            </div>
+            <div class="svc-block">
+              <h3>Risikomanagement &amp; Eskalation</h3>
+              <ul>
+                <li>Früherkennung kritischer Pfade und Abhängigkeiten</li>
+                <li>Standardisierte Eskalationsprozesse</li>
+              </ul>
+            </div>
+            <p class="svc-result">Transparente Steuerung globaler Initiativen, termingerechte und budgettreue Umsetzung</p>
+          </div>
+        </article>
+
+        <article class="svc" id="change">
+          <div class="svc-meta" data-reveal>
+            <p class="svc-index" aria-hidden="true">03</p>
+            <span class="svc-tag">Menschen</span>
+          </div>
+          <div data-reveal style="--rd:100ms">
+            <h2 class="svc-title">Transformations‑ und Change Management</h2>
+            <div class="svc-block">
+              <h3>Stakeholder-Analyse &amp; Kommunikationsplan</h3>
+              <ul>
+                <li>Identifikation und Priorisierung aller betroffenen Gruppen</li>
+                <li>Maßgeschneiderte Kommunikations- und Trainingsmaßnahmen</li>
+              </ul>
+            </div>
+            <div class="svc-block">
+              <h3>Change-Impact-Assessment</h3>
+              <ul>
+                <li>Bewertung organisatorischer und prozessualer Veränderungen</li>
+                <li>Planung von Transition- und Go-Live-Rollen</li>
+              </ul>
+            </div>
+            <div class="svc-block">
+              <h3>Adoptions-Monitoring</h3>
+              <ul>
+                <li>Erfolgsmessung mittels KPIs (z. B. Nutzungsquoten, Zufriedenheitswerte)</li>
+                <li>Nachsteuerung bei Abweichungen</li>
+              </ul>
+            </div>
+            <p class="svc-result">Minimierung von Widerständen, schnellere Nutzereinstiege, höhere Akzeptanz</p>
+          </div>
+        </article>
+
+        <article class="svc" id="prozesse">
+          <div class="svc-meta" data-reveal>
+            <p class="svc-index" aria-hidden="true">04</p>
+            <span class="svc-tag">Prozesse</span>
+          </div>
+          <div data-reveal style="--rd:100ms">
+            <h2 class="svc-title">Prozessoptimierung &amp; Operationalisierung</h2>
+            <div class="svc-block">
+              <h3>Ist-Analyse &amp; Mapping</h3>
+              <ul>
+                <li>Detaillierte Aufnahme Ihrer Geschäfts- und IT-Prozesse</li>
+                <li>Identifikation von Engpässen, Doppelarbeiten und Qualitätslücken</li>
+              </ul>
+            </div>
+            <div class="svc-block">
+              <h3>Soll-Design &amp; Automatisierungskonzepte</h3>
+              <ul>
+                <li>Definition effizienter, digital gestützter Prozessabläufe</li>
+                <li>Einsatz von RPA, Workflow-Tools oder Low-Code-Plattformen</li>
+              </ul>
+            </div>
+            <div class="svc-block">
+              <h3>Pilotierung &amp; Roll-out</h3>
+              <ul>
+                <li>Begleitung der Testläufe in realen Umgebungen</li>
+                <li>Schulung der Fachanwender und Betriebshandover</li>
+              </ul>
+            </div>
+            <p class="svc-result">Höhere Durchsatzraten, geringere Kosten, bessere Qualität und Kundenzufriedenheit</p>
+          </div>
+        </article>
+
+        <article class="svc" id="audit">
+          <div class="svc-meta" data-reveal>
+            <p class="svc-index" aria-hidden="true">05</p>
+            <span class="svc-tag">Sicherheit</span>
+          </div>
+          <div data-reveal style="--rd:100ms">
+            <h2 class="svc-title">Projekt‑Auditierung &amp; Qualitätssicherung</h2>
+            <div class="svc-block">
+              <h3>Health-Checks &amp; Gap-Analysen</h3>
+              <ul>
+                <li>Überprüfung laufender Projekte auf Methodik, Budget, Zeitplan</li>
+                <li>Abgleich mit Best-Practice-Standards (z. B. PMI, PRINCE2, ISO 21500)</li>
+              </ul>
+            </div>
+            <div class="svc-block">
+              <h3>Remediation-Planung</h3>
+              <ul>
+                <li>Konkrete Handlungsempfehlungen und Priorisierung von Quick Wins</li>
+                <li>Governance-Anpassungen zur Risikoreduktion</li>
+              </ul>
+            </div>
+            <div class="svc-block">
+              <h3>Follow-up &amp; Monitoring</h3>
+              <ul>
+                <li>Nachverfolgung der Maßnahmenumsetzung</li>
+                <li>Regelmäßige Status-Updates an das Management</li>
+              </ul>
+            </div>
+            <p class="svc-result">Früherkennung von Problemen, nachhaltige Sicherstellung von Projekterfolgen</p>
+          </div>
+        </article>
+
+        <article class="svc" id="harmonisierung">
+          <div class="svc-meta" data-reveal>
+            <p class="svc-index" aria-hidden="true">06</p>
+            <span class="svc-tag">IT-Operations</span>
+          </div>
+          <div data-reveal style="--rd:100ms">
+            <h2 class="svc-title">Harmonisierung &amp; Standardisierung</h2>
+            <p class="svc-lede">Insbesondere im Bereich IT‑Operations.</p>
+            <div class="svc-block">
+              <h3>Benchmarking &amp; Best-Practice-Vergleiche</h3>
+              <ul>
+                <li>Analyse internationaler Referenzprozesse und Architektur-Standards</li>
+                <li>Ableitung unternehmensspezifischer Mindeststandards</li>
+              </ul>
+            </div>
+            <div class="svc-block">
+              <h3>Rollout-Konzepte</h3>
+              <ul>
+                <li>Changemanagement-Fahrpläne für unterschiedliche Regionen</li>
+                <li>Schulungs- und Supportkonzepte</li>
+              </ul>
+            </div>
+            <div class="svc-block">
+              <h3>Compliance &amp; Security</h3>
+              <ul>
+                <li>Integration von Datenschutz- und Sicherheitsanforderungen (z. B. GDPR, ISO 27001)</li>
+              </ul>
+            </div>
+            <p class="svc-result">Skaleneffekte, leichteres Zusammenspiel Ihrer Einheiten, höhere Rechtssicherheit</p>
+          </div>
+        </article>
+
+        <article class="svc" id="operationalisierung">
+          <div class="svc-meta" data-reveal>
+            <p class="svc-index" aria-hidden="true">07</p>
+            <span class="svc-tag">Strategie</span>
+          </div>
+          <div data-reveal style="--rd:100ms">
+            <h2 class="svc-title">IT‑Strategie‑Operationalisierung</h2>
+            <div class="svc-block">
+              <h3>KPIs &amp; Performance-Management</h3>
+              <ul>
+                <li>Übersetzung von Strategie in messbare Kennzahlen</li>
+                <li>Aufbau eines Scorecard-Systems für Business- und IT-Ziele</li>
+              </ul>
+            </div>
+            <div class="svc-block">
+              <h3>Service-Portfolio-Management</h3>
+              <ul>
+                <li>Definition von Services, SLAs und SLRs</li>
+                <li>Kapazitäts- und Kostenplanung</li>
+              </ul>
+            </div>
+            <div class="svc-block">
+              <h3>Kontinuierliche Verbesserung</h3>
+              <ul>
+                <li>Etablierung von Review- und Optimierungszyklen</li>
+                <li>Integration von Lessons Learned</li>
+              </ul>
+            </div>
+            <p class="svc-result">Verbindliche Zielorientierung, Transparenz im Service-Betrieb, kontinuierliche Weiterentwicklung</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ======================= WARUM WIR ======================= -->
+    <section class="section-pad on-dark" aria-labelledby="partner-title">
+      <span class="tick tick-tl" aria-hidden="true">+</span>
+      <span class="tick tick-tr" aria-hidden="true">+</span>
+      <div class="wrap">
+        <p class="section-index" data-scramble>Warum wir der richtige Partner sind</p>
+        <h2 class="section-title" id="partner-title" data-reveal>Vier Gründe.</h2>
+        <ol class="steps" style="grid-template-columns: repeat(2, 1fr);">
+          <li class="step" data-reveal>
+            <span class="step-no">01</span>
+            <h3 class="step-name">Führungs- und Steuerungsexpertise</h3>
+            <p class="step-desc">Unsere Berater übernehmen direkt verantwortungsvolle Lead‑Rollen: Program‑/Projekt‑Leitung, PMO‑Leitung, Change‑Lead.</p>
+          </li>
+          <li class="step" data-reveal style="--rd:100ms">
+            <span class="step-no">02</span>
+            <h3 class="step-name">Brückenbauer</h3>
+            <p class="step-desc">Wir schaffen den Schulterschluss zwischen Ihrem Fachbereich und technischen Teams – mit klaren, verständlichen Kommunikationsformaten.</p>
+          </li>
+          <li class="step" data-reveal style="--rd:200ms">
+            <span class="step-no">03</span>
+            <h3 class="step-name">Ergebnisfokus</h3>
+            <p class="step-desc">Jeder Arbeitsschritt ist auf messbaren Nutzen und nachhaltige Wertschöpfung ausgerichtet.</p>
+          </li>
+          <li class="step" data-reveal style="--rd:300ms">
+            <span class="step-no">04</span>
+            <h3 class="step-name">Internationale Erfahrung</h3>
+            <p class="step-desc">Von Europa über Nordamerika bis Asien – wir orchestrieren globale Programme und harmonisieren Standorte.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ======================= MEHRWERT-TABELLE ======================= -->
+    <section class="section-pad" aria-labelledby="mehrwert-title">
+      <div class="wrap">
+        <p class="section-index" data-scramble>Ihr Mehrwert auf einen Blick</p>
+        <h2 class="section-title" id="mehrwert-title" data-reveal>Modul, Kernergebnis, Nutzen.</h2>
+        <div class="mw-scroll" data-reveal>
+          <table class="mw-table">
+            <thead>
+              <tr><th>Service-Modul</th><th>Kernergebnis</th><th>Nutzen für Sie</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>IT-Strategie &amp; Governance</td><td>Zukunftsfähige IT-Roadmap</td><td>Klare Steuerungsstrukturen, schnelle Entscheidungen</td></tr>
+              <tr><td>Programm- &amp; Projektmanagement</td><td>Einheitliches Reporting &amp; Risikomanagement</td><td>Termintreue &amp; Budgetdisziplin</td></tr>
+              <tr><td>Change Management</td><td>Hohe Adoptionsraten</td><td>Minimierte Reibungsverluste, starke Mitarbeitermotivation</td></tr>
+              <tr><td>Prozessoptimierung</td><td>Automatisierte Workflows</td><td>Kostenersparnis, Qualitätssteigerung</td></tr>
+              <tr><td>Projekt-Audit</td><td>Früherkennung &amp; Remediation</td><td>Sicherung von Projektzielen</td></tr>
+              <tr><td>Harmonisierung &amp; Standardisierung</td><td>Globale Standards</td><td>Skaleneffekte, Compliance</td></tr>
+              <tr><td>Strategie-Operationalisierung</td><td>KPI-basiertes Performance-Dashboard</td><td>Transparente Zielverfolgung, Effektivität</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact cta-band" aria-label="Kontakt" style="padding-top: 0;">
+      <div class="wrap">
+        <p class="section-index" data-scramble>Kontakt</p>
+        <h2 class="cta-title" data-reveal>Welches Modul beschäftigt Sie gerade?</h2>
+        <div class="contact-cta" data-reveal>
+          <a class="btn btn-solid" href="<?php echo esc_url( home_url( '/kontakt/' ) ); ?>">[ Angebot anfordern <span class="arrow" aria-hidden="true">→</span> ]</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+<?php get_footer(); ?>
