@@ -90,6 +90,32 @@
     if (e.key === "Escape") closeMenu();
   });
 
+  /* ---- Scrollspy: aktiven Nav-Punkt unterstreichen ---- */
+  var navLinks = Array.prototype.slice.call(
+    document.querySelectorAll('.nav-link[href^="#"]')
+  );
+  var spySections = navLinks
+    .map(function (link) {
+      return document.getElementById(link.getAttribute("href").slice(1));
+    })
+    .filter(Boolean);
+  if (spySections.length && "IntersectionObserver" in window) {
+    var setActive = function (id) {
+      navLinks.forEach(function (link) {
+        link.classList.toggle("is-active", link.getAttribute("href") === "#" + id);
+      });
+    };
+    var spyObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px" }
+    );
+    spySections.forEach(function (sec) { spyObserver.observe(sec); });
+  }
+
   /* ---- Scroll-Reveals (Inhalte + Sektions-Eckmarken) ---- */
   var revealTargets = document.querySelectorAll("[data-reveal], .corner-marks");
   if (reduceMotion || !("IntersectionObserver" in window)) {

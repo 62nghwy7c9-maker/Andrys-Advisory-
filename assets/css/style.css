@@ -314,6 +314,13 @@ section {
   transform: scaleX(1);
   transform-origin: left;
 }
+.nav-link.is-active {
+  color: var(--ink-strong);
+}
+.nav-link.is-active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
 
 /* Buttons: eckig, mono, mit [ Klammern ] */
 .btn {
@@ -958,20 +965,30 @@ section {
 .about-lead {
   font-family: var(--font-sans);
   font-weight: 300;
-  font-size: clamp(2rem, 4.4vw, 3.4rem);
-  line-height: 1.12;
+  font-size: clamp(2.2rem, 5.2vw, 4.2rem);
+  line-height: 1.1;
   text-transform: uppercase;
   letter-spacing: 0.005em;
   color: var(--ink-strong);
+  max-width: 16ch;
   text-wrap: balance;
 }
 
 .about-copy {
-  margin-top: 1.6rem;
+  margin-top: 1.8rem;
   color: var(--ink-muted);
+  max-width: 52ch;
+  font-size: clamp(1.0625rem, 1.5vw, 1.125rem);
 }
 .about-copy + .about-copy {
   margin-top: 1rem;
+}
+
+/* Fakten als liegende Leiste unterhalb des Textes */
+.about-facts-row {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem var(--gutter);
 }
 
 .about-facts {
@@ -985,6 +1002,7 @@ section {
 .fact {
   display: grid;
   gap: 0.3rem;
+  align-content: start;
 }
 
 .fact dt {
@@ -1168,6 +1186,9 @@ section {
   .about-grid {
     grid-template-columns: 1fr;
   }
+  .about-facts-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .career-grid {
     grid-template-columns: 1fr;
   }
@@ -1221,6 +1242,9 @@ section {
 
 @media (max-width: 520px) {
   .proof-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-facts-row {
     grid-template-columns: 1fr;
   }
   .hero-cta .btn {
