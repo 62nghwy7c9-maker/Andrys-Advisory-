@@ -1,9 +1,59 @@
-/* Andrys Advisory – Interaktion: Nav, Scroll-Reveals, Zahlen-Counter.
+/* Andrys Advisory – Interaktion: Nav, Scroll-Reveals, Zahlen-Counter,
+   Titel-Masken-Reveal, Grid-Parallax, Scroll-Fortschritt.
    Kein Framework, keine Abhängigkeiten. */
 (function () {
   "use strict";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- Hero-Titel: in Zeilen aufteilen für Masken-Reveal ---- */
+  var splitTitle = document.querySelector("[data-split]");
+  if (splitTitle && !reduceMotion) {
+    var originalText = splitTitle.textContent;
+    var words = originalText.split(/\s+/).filter(Boolean);
+    splitTitle.innerHTML = words
+      .map(function (w) { return "<span class=\"w\">" + w + "</span>"; })
+      .join(" ");
+    var lines = [];
+    var current = null;
+    var lastTop = null;
+    splitTitle.querySelectorAll(".w").forEach(function (span) {
+      var top = span.offsetTop;
+      if (top !== lastTop) {
+        current = [];
+        lines.push(current);
+        lastTop = top;
+      }
+      current.push(span.textContent);
+    });
+    splitTitle.innerHTML = lines
+      .map(function (line, i) {
+        return (
+          "<span class=\"line\"><span class=\"line-inner\" style=\"--ld:" +
+          (0.3 + i * 0.14).toFixed(2) +
+          "s\">" + line.join(" ") + "</span></span>"
+        );
+      })
+      .join("");
+    splitTitle.classList.add("is-split");
+  }
+
+  /* ---- Scroll-Fortschritt + Hero-Grid-Parallax ---- */
+  var progress = document.getElementById("scroll-progress");
+  var heroGrid = document.querySelector(".hero-grid");
+  var onProgress = function () {
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    if (progress && max > 0) {
+      progress.style.transform = "scaleX(" + Math.min(window.scrollY / max, 1) + ")";
+    }
+    if (heroGrid && !reduceMotion && window.scrollY < window.innerHeight * 1.5) {
+      heroGrid.style.transform = "translateY(" + window.scrollY * 0.18 + "px)";
+    }
+  };
+  window.addEventListener("scroll", onProgress, { passive: true });
+  window.addEventListener("resize", onProgress, { passive: true });
+  onProgress();
 
   /* ---- Navigation: Hintergrund nach Scroll ---- */
   var nav = document.getElementById("nav");
@@ -40,8 +90,8 @@
     if (e.key === "Escape") closeMenu();
   });
 
-  /* ---- Scroll-Reveals ---- */
-  var revealTargets = document.querySelectorAll("[data-reveal]");
+  /* ---- Scroll-Reveals (Inhalte + Sektions-Eckmarken) ---- */
+  var revealTargets = document.querySelectorAll("[data-reveal], .corner-marks");
   if (reduceMotion || !("IntersectionObserver" in window)) {
     revealTargets.forEach(function (el) { el.classList.add("in-view"); });
   } else {

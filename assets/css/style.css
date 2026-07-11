@@ -140,6 +140,20 @@ section {
   border-top: 1px solid var(--line-soft);
 }
 
+/* Scroll-Fortschritt: feine Linie am oberen Rand */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  width: 100%;
+  height: 2px;
+  background: var(--ink-strong);
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
 /* Technische "+"-Marken in den Sektionsecken (Arctic-Motiv) */
 .corner-marks::before,
 .corner-marks::after {
@@ -149,8 +163,15 @@ section {
   font-family: var(--font-mono);
   font-size: 0.9rem;
   color: var(--ink-muted);
-  opacity: 0.55;
+  opacity: 0;
+  transition: opacity 900ms ease 350ms, transform 900ms var(--ease-out) 350ms;
+  transform: rotate(-90deg);
   pointer-events: none;
+}
+.corner-marks.in-view::before,
+.corner-marks.in-view::after {
+  opacity: 0.55;
+  transform: none;
 }
 .corner-marks::before {
   left: 1.2rem;
@@ -177,6 +198,12 @@ section {
   flex: 1;
   height: 1px;
   background: var(--line);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1100ms var(--ease-out) 250ms;
+}
+.eyebrow.in-view::after {
+  transform: scaleX(1);
 }
 
 .section-title {
@@ -373,11 +400,10 @@ section {
   overflow: hidden;
 }
 
-/* Feines technisches Raster als Hintergrund */
-.hero::before {
-  content: "";
+/* Feines technisches Raster als Hintergrund (per JS sanft parallax) */
+.hero-grid {
   position: absolute;
-  inset: 0;
+  inset: -80px 0 0;
   background-image:
     linear-gradient(var(--line-soft) 1px, transparent 1px),
     linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
@@ -385,6 +411,12 @@ section {
   -webkit-mask-image: radial-gradient(75% 75% at 60% 40%, rgba(0, 0, 0, 0.5), transparent 78%);
   mask-image: radial-gradient(75% 75% at 60% 40%, rgba(0, 0, 0, 0.5), transparent 78%);
   pointer-events: none;
+  opacity: 0;
+  animation: gridin 1600ms ease 200ms forwards;
+  will-change: transform;
+}
+@keyframes gridin {
+  to { opacity: 1; }
 }
 
 .hero .wrap {
@@ -410,6 +442,14 @@ section {
   width: clamp(6rem, 22vw, 22rem);
   height: 1px;
   background: var(--line);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: drawline 1300ms var(--ease-out) 600ms forwards;
+}
+@keyframes drawline {
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .hero-title {
@@ -422,6 +462,30 @@ section {
   color: var(--ink-strong);
   max-width: 16ch;
   text-wrap: balance;
+}
+
+/* Zeilenweiser Masken-Reveal des Hero-Titels (JS teilt in .line auf) */
+.hero-title.is-split {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+.hero-title .line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.hero-title .line-inner {
+  display: inline-block;
+  transform: translateY(115%);
+  animation: lineup 950ms var(--ease-out) forwards;
+  animation-delay: var(--ld, 0.3s);
+}
+@keyframes lineup {
+  to {
+    transform: none;
+  }
 }
 
 .hero-sub {
@@ -1190,5 +1254,20 @@ section {
   [data-reveal] {
     opacity: 1;
     transform: none;
+  }
+  .hero-title .line-inner,
+  .eyebrow::after,
+  .hero-eyebrow::after,
+  .corner-marks::before,
+  .corner-marks::after {
+    transform: none;
+    opacity: 1;
+  }
+  .corner-marks::before,
+  .corner-marks::after {
+    opacity: 0.55;
+  }
+  .hero-grid {
+    opacity: 1;
   }
 }
