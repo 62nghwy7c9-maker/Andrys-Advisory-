@@ -16,6 +16,25 @@
 </head>
 <body>
 
+<!-- Intro / Preloader (einmal pro Sitzung; JS entfernt es bei reduzierter Bewegung) -->
+<div class="intro" id="intro" aria-hidden="true">
+  <span class="tick tick-tl">+</span>
+  <span class="tick tick-tr">+</span>
+  <span class="tick tick-bl">+</span>
+  <span class="tick tick-br">+</span>
+  <div class="intro-center">
+    <p class="intro-brand" data-scramble>Andrys Advisory ®</p>
+    <p class="intro-label" data-scramble>Beratung / Digitale Transformation</p>
+  </div>
+  <div class="intro-foot">
+    <p class="intro-count"><span id="intro-num">00</span><span class="intro-unit">%</span></p>
+    <div class="intro-bar"><span id="intro-bar"></span></div>
+  </div>
+</div>
+
+<!-- Seiten-Übergang (Wipe zwischen den Views) -->
+<div class="wipe" id="wipe" aria-hidden="true"></div>
+
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
 <header class="nav" id="nav">
     <div class="wrap nav-inner">
@@ -86,6 +105,44 @@
         </div>
       </div>
     </section>
+
+    <!-- ============================== MARQUEE ============================== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="marquee-half">
+          <span class="marquee-item">IT‑Strategie</span><i>+</i>
+          <span class="marquee-item is-solid">Prozessoptimierung</span><i>+</i>
+          <span class="marquee-item">Projektmanagement</span><i>+</i>
+          <span class="marquee-item is-solid">Qualitätssicherung</span><i>+</i>
+          <span class="marquee-item">IT‑Infrastruktur</span><i>+</i>
+          <span class="marquee-item is-solid">Monitoring</span><i>+</i>
+          <span class="marquee-item">Change</span><i>+</i>
+          <span class="marquee-item is-solid">IT‑Strategie</span><i>+</i>
+          <span class="marquee-item">Prozessoptimierung</span><i>+</i>
+          <span class="marquee-item is-solid">Projektmanagement</span><i>+</i>
+          <span class="marquee-item">Qualitätssicherung</span><i>+</i>
+          <span class="marquee-item is-solid">IT‑Infrastruktur</span><i>+</i>
+          <span class="marquee-item">Monitoring</span><i>+</i>
+          <span class="marquee-item is-solid">Change</span><i>+</i>
+        </span>
+        <span class="marquee-half">
+          <span class="marquee-item">IT‑Strategie</span><i>+</i>
+          <span class="marquee-item is-solid">Prozessoptimierung</span><i>+</i>
+          <span class="marquee-item">Projektmanagement</span><i>+</i>
+          <span class="marquee-item is-solid">Qualitätssicherung</span><i>+</i>
+          <span class="marquee-item">IT‑Infrastruktur</span><i>+</i>
+          <span class="marquee-item is-solid">Monitoring</span><i>+</i>
+          <span class="marquee-item">Change</span><i>+</i>
+          <span class="marquee-item is-solid">IT‑Strategie</span><i>+</i>
+          <span class="marquee-item">Prozessoptimierung</span><i>+</i>
+          <span class="marquee-item is-solid">Projektmanagement</span><i>+</i>
+          <span class="marquee-item">Qualitätssicherung</span><i>+</i>
+          <span class="marquee-item is-solid">IT‑Infrastruktur</span><i>+</i>
+          <span class="marquee-item">Monitoring</span><i>+</i>
+          <span class="marquee-item is-solid">Change</span><i>+</i>
+        </span>
+      </div>
+    </div>
 
     <!-- ============================== VERSPRECHEN ============================== -->
     <section class="manifest section-pad" aria-label="Unser Versprechen">

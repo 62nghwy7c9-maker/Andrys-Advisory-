@@ -210,30 +210,61 @@
   }
 })();
 
-/* Mini-Router für die Ein-Datei-Vorschau: #/seite/anker */
+/* Mini-Router: #/seite/anker — mit Wipe-Übergang zwischen den Views */
 (function () {
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var views = document.querySelectorAll(".view");
-  function route() {
+  var wipe = document.getElementById("wipe");
+  var current = null;
+
+  function targetFor() {
+    var h = location.hash.replace(/^#\/?/, "");
+    var name = h.split("/")[0] || "index";
+    return document.getElementById("view-" + name) || document.getElementById("view-index");
+  }
+
+  function apply() {
     var h = location.hash.replace(/^#\/?/, "");
     var parts = h.split("/");
     var name = parts[0] || "index";
     var anchor = parts[1];
     var target = document.getElementById("view-" + name) || document.getElementById("view-index");
-    views.forEach ? null : 0;
     Array.prototype.forEach.call(views, function (v) { v.hidden = v !== target; });
+    var full = anchor ? name + "/" + anchor : name;
     document.querySelectorAll(".nav-link").forEach(function (a) {
-      var route = (a.getAttribute("href") || "").replace(/^#\/?/, "").split("/")[0] || "index";
-      if (route === name) { a.setAttribute("aria-current", "page"); }
+      var aRoute = (a.getAttribute("href") || "").replace(/^#\/?/, "") || "index";
+      if (aRoute === full) { a.setAttribute("aria-current", "page"); }
       else { a.removeAttribute("aria-current"); }
     });
+    current = target;
     if (anchor) {
       var el = document.getElementById(name + "-" + anchor) || document.getElementById(anchor);
       if (el) { el.scrollIntoView(); return; }
     }
     window.scrollTo(0, 0);
   }
+
+  function route() {
+    /* Wipe nur bei echtem View-Wechsel; Anker im selben View scrollen direkt */
+    if (reducedMotion || !wipe || targetFor() === current) { apply(); return; }
+    wipe.classList.add("is-in");
+    wipe.addEventListener("transitionend", function onIn() {
+      wipe.removeEventListener("transitionend", onIn);
+      apply();
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          wipe.classList.add("is-out");
+          wipe.addEventListener("transitionend", function onOut() {
+            wipe.removeEventListener("transitionend", onOut);
+            wipe.classList.remove("is-in");
+            wipe.classList.remove("is-out");
+          });
+        });
+      });
+    });
+  }
   window.addEventListener("hashchange", route);
-  route();
+  apply();
 })();
 
 /* Magnetik & HUD-Cursor — Zusatz zum Arctic-System (siehe Kapitel 3 im CSS).
@@ -288,4 +319,100 @@
     ring.style.transform = "translate(" + rx.toFixed(1) + "px," + ry.toFixed(1) + "px)";
     requestAnimationFrame(loop);
   })();
+})();
+
+/* Intro, Wort-Masken & Scroll-Progress — Kapitel 5 (siehe CSS).
+   Das Intro läuft einmal pro Sitzung; reduzierte Bewegung überspringt es. */
+(function () {
+  "use strict";
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var docEl = document.documentElement;
+
+  /* ---- Intro / Preloader ---- */
+  var intro = document.getElementById("intro");
+  var seen = false;
+  try { seen = sessionStorage.getItem("aa-intro") === "1"; } catch (e) {}
+  if (intro && (reducedMotion || seen)) {
+    intro.parentNode.removeChild(intro);
+    intro = null;
+  }
+  if (intro) {
+    docEl.classList.add("intro-running");
+    document.body.style.overflow = "hidden";
+    try { sessionStorage.setItem("aa-intro", "1"); } catch (e) {}
+    var num = document.getElementById("intro-num");
+    var bar = document.getElementById("intro-bar");
+    var t0 = null;
+    var DUR = 1900;
+    var easeOut = function (t) { return 1 - Math.pow(1 - t, 3); };
+    var frame = function (ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / DUR, 1);
+      var v = Math.round(easeOut(p) * 100);
+      num.textContent = (v < 10 ? "0" : "") + v;
+      bar.style.width = (easeOut(p) * 100).toFixed(1) + "%";
+      if (p < 1) { requestAnimationFrame(frame); return; }
+      setTimeout(function () {
+        document.body.style.overflow = "";
+        docEl.classList.remove("intro-running");
+        docEl.classList.add("intro-done");
+        intro.addEventListener("transitionend", function () {
+          docEl.classList.add("intro-gone");
+        }, { once: true });
+      }, 300);
+    };
+    requestAnimationFrame(frame);
+  }
+
+  /* ---- Wort-Masken: Titel heben Wörter aus Masken ---- */
+  if (!reducedMotion) {
+    var wrapWord = function (content, i) {
+      var w = document.createElement("span");
+      w.className = "w";
+      var wi = document.createElement("span");
+      wi.className = "wi";
+      wi.style.setProperty("--wd", (i * 55) + "ms");
+      wi.appendChild(content);
+      w.appendChild(wi);
+      return w;
+    };
+    document.querySelectorAll(".section-title, .page-hero-title, .cta-title").forEach(function (el) {
+      var nodes = Array.prototype.slice.call(el.childNodes);
+      var i = 0;
+      el.textContent = "";
+      nodes.forEach(function (node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          node.textContent.split(/(\s+)/).forEach(function (part) {
+            if (!part) return;
+            if (/^\s+$/.test(part)) {
+              el.appendChild(document.createTextNode(" "));
+            } else {
+              el.appendChild(wrapWord(document.createTextNode(part), i++));
+            }
+          });
+        } else if (node.nodeName === "BR") {
+          el.appendChild(node);
+        } else {
+          el.appendChild(wrapWord(node, i++));
+        }
+      });
+      el.classList.add("is-split");
+    });
+  }
+
+  /* ---- Scroll-Progress (Haarlinie oben) ---- */
+  var prog = document.createElement("div");
+  prog.className = "progress";
+  document.body.appendChild(prog);
+  var progTicking = false;
+  var updateProg = function () {
+    progTicking = false;
+    var max = docEl.scrollHeight - window.innerHeight;
+    prog.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0).toFixed(2) + "%";
+  };
+  window.addEventListener("scroll", function () {
+    if (!progTicking) { progTicking = true; requestAnimationFrame(updateProg); }
+  }, { passive: true });
+  window.addEventListener("hashchange", function () { requestAnimationFrame(updateProg); });
+  updateProg();
 })();

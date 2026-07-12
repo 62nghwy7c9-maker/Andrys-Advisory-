@@ -1364,3 +1364,198 @@ html.has-cursor.cursor-hidden .cursor-ring { opacity: 0; }
   padding-top: clamp(1.5rem, 3vw, 2.5rem);
   border-top: 1px solid var(--line);
 }
+
+/* ==========================================================================
+   Kapitel 5 — Intro, Seiten-Übergänge, Wort-Masken, Marquee, Scroll-Progress
+   (Inspiration: Preloader mit Zähler + Vorhang, Sektions-Wipes)
+   ========================================================================== */
+
+/* untere Fadenkreuz-Marker (oben existieren bereits) */
+.tick-bl { bottom: 1.2rem; left: 1.4rem; }
+.tick-br { bottom: 1.2rem; right: 1.4rem; }
+
+/* ---- Intro / Preloader ---- */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 89;
+  background: var(--ice-0);
+  transition: transform 0.95s cubic-bezier(0.76, 0, 0.24, 1);
+}
+html.intro-done .intro { transform: translateY(-101%); }
+html.intro-gone .intro { display: none; }
+
+.intro-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  text-align: center;
+  padding-inline: var(--pad);
+}
+.intro-brand {
+  font-family: var(--mono);
+  font-size: clamp(1rem, 2.6vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.intro-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fog);
+}
+.intro-foot {
+  position: absolute;
+  left: clamp(1.4rem, 4vw, 3rem);
+  right: clamp(1.4rem, 4vw, 3rem);
+  bottom: clamp(1.4rem, 4vw, 3rem);
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+.intro-count {
+  font-weight: 290;
+  font-size: clamp(3.2rem, 9vw, 6.5rem);
+  line-height: 0.9;
+  color: var(--slate);
+  font-variant-numeric: tabular-nums;
+}
+.intro-unit {
+  font-family: var(--mono);
+  font-size: clamp(0.8rem, 1.6vw, 1rem);
+  font-weight: 500;
+  color: var(--fog);
+  margin-left: 0.35em;
+}
+.intro-bar {
+  position: relative;
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+  margin-bottom: 0.6rem;
+}
+.intro-bar span {
+  position: absolute;
+  left: 0;
+  top: -0.5px;
+  height: 2px;
+  width: 0%;
+  background: var(--slate);
+}
+
+/* Hero-Animationen warten, bis das Intro den Vorhang hebt */
+html.intro-running .hero-title .line-in,
+html.intro-running .hero-stagger > *:not(.hero-title),
+html.intro-running .hero-scrollcue {
+  animation-play-state: paused;
+}
+
+/* ---- Seiten-Übergang (Wipe) ---- */
+.wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 88;
+  background: var(--ink);
+  transform: translateY(101%);
+  pointer-events: none;
+}
+.wipe.is-in {
+  transform: translateY(0);
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.wipe.is-in.is-out {
+  transform: translateY(-101%);
+  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.06s;
+}
+
+/* ---- Scroll-Progress (Haarlinie ganz oben) ---- */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 85;
+  height: 2px;
+  width: 0%;
+  background: var(--slate);
+  pointer-events: none;
+}
+
+/* ---- Wort-Masken für Titel (Reveal hebt Wörter aus Masken) ---- */
+[data-reveal].is-split {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+.is-split .w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-inline: 0.05em;
+  margin-inline: -0.05em;
+}
+.is-split .wi {
+  display: inline-block;
+  transform: translateY(115%);
+  transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: var(--wd, 0ms);
+  will-change: transform;
+}
+.is-split.is-in .wi { transform: none; }
+
+/* ---- Marquee (Leistungs-Schlagworte, Kontur/Voll im Wechsel) ---- */
+.marquee {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  padding-block: clamp(1.2rem, 2.5vw, 2rem);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 44s linear infinite;
+}
+.marquee-half {
+  display: flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+.marquee-item {
+  font-weight: 290;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(56, 62, 78, 0.42);
+}
+.marquee-item.is-solid {
+  color: var(--slate);
+  -webkit-text-stroke: 0;
+}
+@supports not (-webkit-text-stroke: 1px black) {
+  .marquee-item { color: var(--fog); }
+}
+.marquee i {
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 12px;
+  color: var(--fog);
+  padding-inline: clamp(1.3rem, 3vw, 2.4rem);
+}
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+/* ---- Reduzierte Bewegung ---- */
+@media (prefers-reduced-motion: reduce) {
+  .intro, .wipe { display: none; }
+  .marquee-track { animation: none; }
+  .is-split .wi { transform: none; transition: none; }
+}
