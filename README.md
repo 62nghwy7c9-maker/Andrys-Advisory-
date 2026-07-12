@@ -6,8 +6,9 @@ Website der Andrys Advisory GmbH (Beratung für digitale Transformation) im
 ## Technik
 
 - Pures HTML, CSS und Vanilla-JavaScript – kein Framework, kein Build-Schritt
-- Ein-Seiten-App mit Hash-Router: `#/leistungen`, `#/referenzen`, `#/index/werte`,
-  `#/karriere`, `#/ueber`, `#/kontakt`, `#/impressum`, `#/datenschutz`
+- Echter Mehrseiter: `index`, `leistungen`, `referenzen`, `karriere`, `ueber`,
+  `kontakt`, `impressum`, `datenschutz` (je eine HTML-Datei, Wipe-Übergang
+  beim Seitenwechsel)
 - WebGL-Kristall (Three.js, gebündelt in `assets/js/crystal.js`), an den
   Scrollweg des Heros gekoppelt
 - Animationen: Scroll-Reveals, Scramble-Decode, Wortnebel, Zähler, magnetische
@@ -18,12 +19,19 @@ Website der Andrys Advisory GmbH (Beratung für digitale Transformation) im
 ## Struktur
 
 ```
-index.html            Gesamte Site (alle Views + Hash-Router)
-vercel.json           Vercel-Konfiguration (Header, Caching)
+index.html            Startseite (Hero mit Kristall, Werte, Stories, Intro)
+leistungen.html       Service-Module als Akkordeons
+referenzen.html       Success Stories
+karriere.html         Karriere & Kultur
+ueber.html            Über uns
+kontakt.html          Kontaktwege, Formular, FAQ-Akkordeon
+impressum.html        Impressum (Platzhalter füllen)
+datenschutz.html      Datenschutzerklärung (Platzhalter füllen)
+vercel.json           Vercel-Konfiguration (Header, Caching, cleanUrls)
 robots.txt
 assets/css/style.css  Arctic-Design-System
-assets/js/main.js     Interaktion, Animationen, Router
-assets/js/crystal.js  Three.js + Kristall-Szene
+assets/js/main.js     Interaktion, Animationen, Akkordeons
+assets/js/crystal.js  Three.js + Kristall-Szene (nur Startseite)
 assets/fonts/         Hanken Grotesk, IBM Plex Mono (woff2)
 favicon.svg
 ```
@@ -48,6 +56,6 @@ python3 -m http.server 8000
 
 ## Vor Veröffentlichung
 
-Platzhalter in den Views Impressum/Datenschutz füllen: Anschrift, Telefon,
+Platzhalter in impressum.html/datenschutz.html füllen: Anschrift, Telefon,
 Registergericht/HRB, USt-IdNr., Hosting-Anbieter. E-Mail-Adresse und
 Kundenzitate prüfen.

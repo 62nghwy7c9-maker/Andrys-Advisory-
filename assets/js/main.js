@@ -210,61 +210,93 @@
   }
 })();
 
-/* Mini-Router: #/seite/anker — mit Wipe-Übergang zwischen den Views */
+/* Mehrseiter: Wipe beim Seitenwechsel + Akkordeons (Service-Module, FAQ) */
 (function () {
+  "use strict";
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var views = document.querySelectorAll(".view");
   var wipe = document.getElementById("wipe");
-  var current = null;
 
-  function targetFor() {
-    var h = location.hash.replace(/^#\/?/, "");
-    var name = h.split("/")[0] || "index";
-    return document.getElementById("view-" + name) || document.getElementById("view-index");
-  }
-
-  function apply() {
-    var h = location.hash.replace(/^#\/?/, "");
-    var parts = h.split("/");
-    var name = parts[0] || "index";
-    var anchor = parts[1];
-    var target = document.getElementById("view-" + name) || document.getElementById("view-index");
-    Array.prototype.forEach.call(views, function (v) { v.hidden = v !== target; });
-    var full = anchor ? name + "/" + anchor : name;
-    document.querySelectorAll(".nav-link").forEach(function (a) {
-      var aRoute = (a.getAttribute("href") || "").replace(/^#\/?/, "") || "index";
-      if (aRoute === full) { a.setAttribute("aria-current", "page"); }
-      else { a.removeAttribute("aria-current"); }
+  /* ---- Wipe deckt ab, bevor eine andere Seite lädt ---- */
+  if (wipe && !reducedMotion) {
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest("a[href]");
+      if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      if (a.target && a.target !== "_self") return;
+      var href = a.getAttribute("href");
+      if (!href || /^(https?:|mailto:|tel:|#)/.test(href)) return;
+      var url;
+      try { url = new URL(href, location.href); } catch (err) { return; }
+      if (url.origin !== location.origin) return;
+      if (url.pathname === location.pathname) return; /* Anker auf derselben Seite */
+      e.preventDefault();
+      wipe.classList.add("is-in");
+      setTimeout(function () { location.href = url.href; }, 420);
     });
-    current = target;
-    if (anchor) {
-      var el = document.getElementById(name + "-" + anchor) || document.getElementById(anchor);
-      if (el) { el.scrollIntoView(); return; }
-    }
-    window.scrollTo(0, 0);
-  }
-
-  function route() {
-    /* Wipe nur bei echtem View-Wechsel; Anker im selben View scrollen direkt */
-    if (reducedMotion || !wipe || targetFor() === current) { apply(); return; }
-    wipe.classList.add("is-in");
-    wipe.addEventListener("transitionend", function onIn() {
-      wipe.removeEventListener("transitionend", onIn);
-      apply();
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          wipe.classList.add("is-out");
-          wipe.addEventListener("transitionend", function onOut() {
-            wipe.removeEventListener("transitionend", onOut);
-            wipe.classList.remove("is-in");
-            wipe.classList.remove("is-out");
-          });
-        });
-      });
+    /* Zurück-Navigation aus dem bfcache: Wipe zurücksetzen */
+    window.addEventListener("pageshow", function (e) {
+      if (e.persisted) wipe.classList.remove("is-in");
     });
   }
-  window.addEventListener("hashchange", route);
-  apply();
+
+  /* ---- Service-Module in Akkordeons verwandeln (progressive enhancement) ---- */
+  document.querySelectorAll(".svc").forEach(function (svc) {
+    var title = svc.querySelector(".svc-title");
+    if (!title || !title.parentElement) return;
+    var content = title.parentElement;
+
+    var panel = document.createElement("div");
+    panel.className = "acc-panel";
+    var inner = document.createElement("div");
+    inner.className = "acc-panel-inner";
+    while (title.nextSibling) inner.appendChild(title.nextSibling);
+    panel.appendChild(inner);
+    content.appendChild(panel);
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "acc-toggle";
+    btn.setAttribute("aria-expanded", "false");
+    var label = document.createElement("span");
+    label.className = "acc-label";
+    while (title.firstChild) label.appendChild(title.firstChild);
+    var icon = document.createElement("span");
+    icon.className = "acc-icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = "+";
+    btn.appendChild(label);
+    btn.appendChild(icon);
+    title.appendChild(btn);
+    svc.classList.add("is-acc");
+  });
+
+  /* ---- Gemeinsames Toggle-Verhalten (Module + FAQ) ---- */
+  var openItem = function (item, open) {
+    item.classList.toggle("is-open", open);
+    var btn = item.querySelector(".acc-toggle");
+    if (btn) btn.setAttribute("aria-expanded", String(open));
+  };
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest(".acc-toggle");
+    if (!btn) return;
+    var item = btn.closest(".svc, .acc");
+    if (item) openItem(item, !item.classList.contains("is-open"));
+  });
+
+  /* Erstes Service-Modul geöffnet starten */
+  var firstSvc = document.querySelector(".svc.is-acc");
+  if (firstSvc) openItem(firstSvc, true);
+
+  /* Anker öffnet das zugehörige Modul (z. B. leistungen.html#leistungen-governance) */
+  var openFromHash = function () {
+    var h = location.hash.replace(/^#\/?/, "");
+    if (!h) return;
+    var id = h.split("/").pop();
+    var el = document.getElementById(id);
+    var item = el && el.closest ? (el.closest(".svc, .acc") || (el.classList && (el.classList.contains("svc") || el.classList.contains("acc")) ? el : null)) : null;
+    if (item) openItem(item, true);
+  };
+  window.addEventListener("hashchange", openFromHash);
+  openFromHash();
 })();
 
 /* Magnetik & HUD-Cursor — Zusatz zum Arctic-System (siehe Kapitel 3 im CSS).

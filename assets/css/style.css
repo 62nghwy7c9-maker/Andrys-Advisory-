@@ -1559,3 +1559,95 @@ html.intro-running .hero-scrollcue {
   .marquee-track { animation: none; }
   .is-split .wi { transform: none; transition: none; }
 }
+
+/* ==========================================================================
+   Kapitel 6 — Mehrseiter & Akkordeons (Service-Module, FAQ)
+   ========================================================================== */
+
+/* Seiten-Einblendung beim Laden (ersetzt den SPA-View-Wechsel) */
+main {
+  animation: page-in 0.55s var(--ease) both;
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+/* ---- Akkordeon-Grundmuster (Service-Module + FAQ) ---- */
+.acc-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+.acc-icon {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 0.9em;
+  font-weight: 400;
+  color: var(--fog);
+  transition: transform 0.35s var(--ease), color 0.25s ease;
+}
+.is-open .acc-icon {
+  transform: rotate(45deg);
+  color: var(--slate);
+}
+.acc-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.55s var(--ease);
+}
+.acc-panel-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+.is-open .acc-panel {
+  grid-template-rows: 1fr;
+}
+
+/* Service-Module: Titelzeile als Toggle, Panel mit Innenabstand */
+.svc.is-acc .svc-title .acc-toggle:hover .acc-icon {
+  color: var(--slate);
+}
+.svc.is-acc .acc-panel-inner > *:first-child {
+  margin-top: 1.6rem;
+}
+
+/* FAQ-Liste */
+.faq-list {
+  border-top: 1px solid var(--line);
+}
+.acc {
+  border-bottom: 1px solid var(--line);
+}
+.acc-head {
+  margin: 0;
+}
+.acc .acc-toggle {
+  padding-block: 1.4rem;
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.4;
+}
+.acc .acc-panel-inner p {
+  padding-bottom: 1.6rem;
+  max-width: 62ch;
+  font-size: 15px;
+  line-height: 1.75;
+  color: color-mix(in srgb, var(--slate) 78%, var(--fog));
+}
+
+/* Reduzierte Bewegung: Panels ohne Übergang, Seite ohne Einblendung */
+@media (prefers-reduced-motion: reduce) {
+  main { animation: none; }
+  .acc-panel { transition: none; }
+}
