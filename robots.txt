@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://andrys-advisory.de/sitemap.xml
