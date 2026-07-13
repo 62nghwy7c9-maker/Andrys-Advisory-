@@ -1510,53 +1510,10 @@ html.intro-running .hero-scrollcue {
 }
 .is-split.is-in .wi { transform: none; }
 
-/* ---- Marquee (Leistungs-Schlagworte, Kontur/Voll im Wechsel) ---- */
-.marquee {
-  overflow: hidden;
-  border-top: 1px solid var(--line);
-  padding-block: clamp(1.2rem, 2.5vw, 2rem);
-}
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 44s linear infinite;
-}
-.marquee-half {
-  display: flex;
-  align-items: baseline;
-  white-space: nowrap;
-}
-.marquee-item {
-  font-weight: 290;
-  font-size: clamp(1.8rem, 4vw, 3.2rem);
-  line-height: 1;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(56, 62, 78, 0.42);
-}
-.marquee-item.is-solid {
-  color: var(--slate);
-  -webkit-text-stroke: 0;
-}
-@supports not (-webkit-text-stroke: 1px black) {
-  .marquee-item { color: var(--fog); }
-}
-.marquee i {
-  font-family: var(--mono);
-  font-style: normal;
-  font-size: 12px;
-  color: var(--fog);
-  padding-inline: clamp(1.3rem, 3vw, 2.4rem);
-}
-@keyframes marquee {
-  to { transform: translateX(-50%); }
-}
 
 /* ---- Reduzierte Bewegung ---- */
 @media (prefers-reduced-motion: reduce) {
   .intro, .wipe { display: none; }
-  .marquee-track { animation: none; }
   .is-split .wi { transform: none; transition: none; }
 }
 
