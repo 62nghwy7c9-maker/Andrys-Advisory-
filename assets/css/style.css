@@ -683,7 +683,7 @@ section { position: relative; }
   flex-wrap: wrap;
   padding-block: 1.75rem;
 }
-.footer-links { display: flex; gap: 2rem; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 0.9rem 2rem; }
 .footer a { color: var(--fog); text-decoration: none; transition: color 0.2s; }
 .footer a:hover { color: var(--frost); }
 
@@ -1650,4 +1650,61 @@ main {
 @media (prefers-reduced-motion: reduce) {
   main { animation: none; }
   .acc-panel { transition: none; }
+}
+
+/* ---- Lange Wörter & URLs dürfen umbrechen (verhindert mobilen Überlauf) ---- */
+.svc-title,
+.case-title,
+.acc-label,
+.case-sector,
+.page h1,
+.page h2,
+.page h3,
+.page h4 {
+  hyphens: auto;
+  overflow-wrap: anywhere;
+}
+.svc-meta,
+.case-meta,
+.svc > div,
+.case > div {
+  min-width: 0;
+}
+.page a,
+.page p {
+  overflow-wrap: anywhere;
+}
+
+/* Sehr schmale Screens: große Titel eine Stufe kleiner, damit auch lange
+   Einzelwörter in den Wort-Masken (keine Trennung möglich) hineinpassen */
+@media (max-width: 480px) {
+  .page-hero-title { font-size: clamp(1.7rem, 8.6vw, 2.2rem); }
+  .section-title { font-size: clamp(1.5rem, 7.6vw, 1.9rem); }
+  .cta-title { font-size: clamp(1.6rem, 8vw, 2.1rem); }
+}
+
+/* Tabellen in Modul-Panels scrollen horizontal statt die Seite zu sprengen */
+.svc-block table {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+@media (max-width: 400px) {
+  .hero-title { font-size: clamp(1.8rem, 10.6vw, 2.4rem); }
+}
+
+/* Service-Zeilen: lange Einzelwörter (z. B. „Anpassungsfähigkeit") trennen */
+.service-name {
+  hyphens: auto;
+  overflow-wrap: anywhere;
+}
+.service > div { min-width: 0; }
+
+/* Schritt-Karten dürfen schrumpfen; lange Wörter darin trennen */
+.step { min-width: 0; }
+.step-name,
+.step-desc {
+  hyphens: auto;
+  overflow-wrap: anywhere;
 }
