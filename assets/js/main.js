@@ -210,30 +210,93 @@
   }
 })();
 
-/* Mini-Router für die Ein-Datei-Vorschau: #/seite/anker */
+/* Mehrseiter: Wipe beim Seitenwechsel + Akkordeons (Service-Module, FAQ) */
 (function () {
-  var views = document.querySelectorAll(".view");
-  function route() {
-    var h = location.hash.replace(/^#\/?/, "");
-    var parts = h.split("/");
-    var name = parts[0] || "index";
-    var anchor = parts[1];
-    var target = document.getElementById("view-" + name) || document.getElementById("view-index");
-    views.forEach ? null : 0;
-    Array.prototype.forEach.call(views, function (v) { v.hidden = v !== target; });
-    document.querySelectorAll(".nav-link").forEach(function (a) {
-      var route = (a.getAttribute("href") || "").replace(/^#\/?/, "").split("/")[0] || "index";
-      if (route === name) { a.setAttribute("aria-current", "page"); }
-      else { a.removeAttribute("aria-current"); }
+  "use strict";
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var wipe = document.getElementById("wipe");
+
+  /* ---- Wipe deckt ab, bevor eine andere Seite lädt ---- */
+  if (wipe && !reducedMotion) {
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest("a[href]");
+      if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      if (a.target && a.target !== "_self") return;
+      var href = a.getAttribute("href");
+      if (!href || /^(https?:|mailto:|tel:|#)/.test(href)) return;
+      var url;
+      try { url = new URL(href, location.href); } catch (err) { return; }
+      if (url.origin !== location.origin) return;
+      if (url.pathname === location.pathname) return; /* Anker auf derselben Seite */
+      e.preventDefault();
+      wipe.classList.add("is-in");
+      setTimeout(function () { location.href = url.href; }, 420);
     });
-    if (anchor) {
-      var el = document.getElementById(name + "-" + anchor) || document.getElementById(anchor);
-      if (el) { el.scrollIntoView(); return; }
-    }
-    window.scrollTo(0, 0);
+    /* Zurück-Navigation aus dem bfcache: Wipe zurücksetzen */
+    window.addEventListener("pageshow", function (e) {
+      if (e.persisted) wipe.classList.remove("is-in");
+    });
   }
-  window.addEventListener("hashchange", route);
-  route();
+
+  /* ---- Service-Module in Akkordeons verwandeln (progressive enhancement) ---- */
+  document.querySelectorAll(".svc").forEach(function (svc) {
+    var title = svc.querySelector(".svc-title");
+    if (!title || !title.parentElement) return;
+    var content = title.parentElement;
+
+    var panel = document.createElement("div");
+    panel.className = "acc-panel";
+    var inner = document.createElement("div");
+    inner.className = "acc-panel-inner";
+    while (title.nextSibling) inner.appendChild(title.nextSibling);
+    panel.appendChild(inner);
+    content.appendChild(panel);
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "acc-toggle";
+    btn.setAttribute("aria-expanded", "false");
+    var label = document.createElement("span");
+    label.className = "acc-label";
+    while (title.firstChild) label.appendChild(title.firstChild);
+    var icon = document.createElement("span");
+    icon.className = "acc-icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = "+";
+    btn.appendChild(label);
+    btn.appendChild(icon);
+    title.appendChild(btn);
+    svc.classList.add("is-acc");
+  });
+
+  /* ---- Gemeinsames Toggle-Verhalten (Module + FAQ) ---- */
+  var openItem = function (item, open) {
+    item.classList.toggle("is-open", open);
+    var btn = item.querySelector(".acc-toggle");
+    if (btn) btn.setAttribute("aria-expanded", String(open));
+  };
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest(".acc-toggle");
+    if (!btn) return;
+    var item = btn.closest(".svc, .acc");
+    if (item) openItem(item, !item.classList.contains("is-open"));
+  });
+
+  /* Erstes Service-Modul geöffnet starten */
+  var firstSvc = document.querySelector(".svc.is-acc");
+  if (firstSvc) openItem(firstSvc, true);
+
+  /* Anker öffnet das zugehörige Modul (z. B. leistungen.html#leistungen-governance) */
+  var openFromHash = function () {
+    var h = location.hash.replace(/^#\/?/, "");
+    if (!h) return;
+    var id = h.split("/").pop();
+    var el = document.getElementById(id);
+    var item = el && el.closest ? (el.closest(".svc, .acc") || (el.classList && (el.classList.contains("svc") || el.classList.contains("acc")) ? el : null)) : null;
+    if (item) openItem(item, true);
+  };
+  window.addEventListener("hashchange", openFromHash);
+  openFromHash();
 })();
 
 /* Magnetik & HUD-Cursor — Zusatz zum Arctic-System (siehe Kapitel 3 im CSS).
@@ -288,4 +351,100 @@
     ring.style.transform = "translate(" + rx.toFixed(1) + "px," + ry.toFixed(1) + "px)";
     requestAnimationFrame(loop);
   })();
+})();
+
+/* Intro, Wort-Masken & Scroll-Progress — Kapitel 5 (siehe CSS).
+   Das Intro läuft einmal pro Sitzung; reduzierte Bewegung überspringt es. */
+(function () {
+  "use strict";
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var docEl = document.documentElement;
+
+  /* ---- Intro / Preloader ---- */
+  var intro = document.getElementById("intro");
+  var seen = false;
+  try { seen = sessionStorage.getItem("aa-intro") === "1"; } catch (e) {}
+  if (intro && (reducedMotion || seen)) {
+    intro.parentNode.removeChild(intro);
+    intro = null;
+  }
+  if (intro) {
+    docEl.classList.add("intro-running");
+    document.body.style.overflow = "hidden";
+    try { sessionStorage.setItem("aa-intro", "1"); } catch (e) {}
+    var num = document.getElementById("intro-num");
+    var bar = document.getElementById("intro-bar");
+    var t0 = null;
+    var DUR = 1900;
+    var easeOut = function (t) { return 1 - Math.pow(1 - t, 3); };
+    var frame = function (ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / DUR, 1);
+      var v = Math.round(easeOut(p) * 100);
+      num.textContent = (v < 10 ? "0" : "") + v;
+      bar.style.width = (easeOut(p) * 100).toFixed(1) + "%";
+      if (p < 1) { requestAnimationFrame(frame); return; }
+      setTimeout(function () {
+        document.body.style.overflow = "";
+        docEl.classList.remove("intro-running");
+        docEl.classList.add("intro-done");
+        intro.addEventListener("transitionend", function () {
+          docEl.classList.add("intro-gone");
+        }, { once: true });
+      }, 300);
+    };
+    requestAnimationFrame(frame);
+  }
+
+  /* ---- Wort-Masken: Titel heben Wörter aus Masken ---- */
+  if (!reducedMotion) {
+    var wrapWord = function (content, i) {
+      var w = document.createElement("span");
+      w.className = "w";
+      var wi = document.createElement("span");
+      wi.className = "wi";
+      wi.style.setProperty("--wd", (i * 55) + "ms");
+      wi.appendChild(content);
+      w.appendChild(wi);
+      return w;
+    };
+    document.querySelectorAll(".section-title, .page-hero-title, .cta-title").forEach(function (el) {
+      var nodes = Array.prototype.slice.call(el.childNodes);
+      var i = 0;
+      el.textContent = "";
+      nodes.forEach(function (node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          node.textContent.split(/(\s+)/).forEach(function (part) {
+            if (!part) return;
+            if (/^\s+$/.test(part)) {
+              el.appendChild(document.createTextNode(" "));
+            } else {
+              el.appendChild(wrapWord(document.createTextNode(part), i++));
+            }
+          });
+        } else if (node.nodeName === "BR") {
+          el.appendChild(node);
+        } else {
+          el.appendChild(wrapWord(node, i++));
+        }
+      });
+      el.classList.add("is-split");
+    });
+  }
+
+  /* ---- Scroll-Progress (Haarlinie oben) ---- */
+  var prog = document.createElement("div");
+  prog.className = "progress";
+  document.body.appendChild(prog);
+  var progTicking = false;
+  var updateProg = function () {
+    progTicking = false;
+    var max = docEl.scrollHeight - window.innerHeight;
+    prog.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0).toFixed(2) + "%";
+  };
+  window.addEventListener("scroll", function () {
+    if (!progTicking) { progTicking = true; requestAnimationFrame(updateProg); }
+  }, { passive: true });
+  window.addEventListener("hashchange", function () { requestAnimationFrame(updateProg); });
+  updateProg();
 })();
