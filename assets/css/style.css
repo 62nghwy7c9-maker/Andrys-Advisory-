@@ -1690,7 +1690,7 @@ main {
   transition: padding-left 0.3s var(--ease), color 0.2s ease;
 }
 .teaser-list a:hover { padding-left: 0.6rem; color: var(--ink); }
-.teaser-list a > span:last-child { color: var(--fog); transition: transform 0.3s var(--ease), color 0.2s ease; }
+.teaser-list a > span:last-child { flex: none; font-family: var(--mono); font-size: 14px; color: var(--fog); transition: transform 0.3s var(--ease), color 0.2s ease; }
 .teaser-list a:hover > span:last-child { color: var(--slate); transform: translate(3px, -3px); }
 
 /* Success-Stories-Teaser: drei Kennzahlen (on-dark) */
